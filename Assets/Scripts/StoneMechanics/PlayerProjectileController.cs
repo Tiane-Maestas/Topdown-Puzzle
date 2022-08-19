@@ -23,6 +23,10 @@ public class PlayerProjectileController : MonoBehaviour
     {
         if (_isShooting)
         {
+            if (index >= 7)
+            {
+                index = 0;
+            }
             ActiveStone.currentStoneBehaviour = index;
             index++;
             GameObject newStone = Instantiate(genericStone, this.transform.position, this.transform.rotation);

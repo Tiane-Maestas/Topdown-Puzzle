@@ -1,10 +1,11 @@
 using UnityEngine;
 using System;
+using StoneTypes;
 
 public class ActiveStone : MonoBehaviour
 {
     // Using the Strategy Pattern for different types of stones.
-    public enum StoneTypes
+    public enum StoneType
     {
         Normal,
         Fire,
@@ -16,8 +17,8 @@ public class ActiveStone : MonoBehaviour
     }
 
     // Gives the ability to set the type of stone to instantiate as static class variables.
-    public static int currentStoneBehaviour = (int)StoneTypes.Normal;
-    public static StoneBehaviour[] allStoneBehaviours = new StoneBehaviour[Enum.GetNames(typeof(StoneTypes)).Length];
+    public static int currentStoneBehaviour = (int)StoneType.Normal;
+    public static StoneBehaviour[] allStoneBehaviours = new StoneBehaviour[Enum.GetNames(typeof(StoneType)).Length];
     private static bool _stoneBehavioursSet = false;
 
     // Specific to each individual class instance.
@@ -42,13 +43,13 @@ public class ActiveStone : MonoBehaviour
         // Only set all the stone behaviours the first time they are needed.
         if (!ActiveStone._stoneBehavioursSet)
         {
-            ActiveStone.allStoneBehaviours[(int)StoneTypes.Normal] = new NormalStone();
-            ActiveStone.allStoneBehaviours[(int)StoneTypes.Fire] = new FireStone();
-            ActiveStone.allStoneBehaviours[(int)StoneTypes.Explosion] = new ExplosionStone();
-            ActiveStone.allStoneBehaviours[(int)StoneTypes.Bounce] = new BounceStone();
-            ActiveStone.allStoneBehaviours[(int)StoneTypes.Teleport] = new TeleportStone();
-            ActiveStone.allStoneBehaviours[(int)StoneTypes.MindControl] = new MindControlStone();
-            ActiveStone.allStoneBehaviours[(int)StoneTypes.Joker] = new JokerStone();
+            ActiveStone.allStoneBehaviours[(int)StoneType.Normal] = new NormalStone();
+            ActiveStone.allStoneBehaviours[(int)StoneType.Fire] = new FireStone();
+            ActiveStone.allStoneBehaviours[(int)StoneType.Explosion] = new ExplosionStone();
+            ActiveStone.allStoneBehaviours[(int)StoneType.Bounce] = new BounceStone();
+            ActiveStone.allStoneBehaviours[(int)StoneType.Teleport] = new TeleportStone();
+            ActiveStone.allStoneBehaviours[(int)StoneType.MindControl] = new MindControlStone();
+            ActiveStone.allStoneBehaviours[(int)StoneType.Joker] = new JokerStone();
             ActiveStone._stoneBehavioursSet = true;
             Debug.Log("Stone Behaviours Setup Complete.");
         }
