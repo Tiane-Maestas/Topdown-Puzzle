@@ -26,7 +26,17 @@ public class PlayerProjectileController : MonoBehaviour
                 currentStoneType = StoneType.Normal;
             }
             ActiveStone.currentStoneBehaviour = currentStoneType;
-            GameObject newStone = Instantiate(genericStone, this.transform.position, this.transform.rotation);
+
+            // aim with mouse
+            Vector2 toMouseVector = (Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition) - (Vector2) transform.position;
+            toMouseVector.Normalize();
+            ActiveStone.throwVector = toMouseVector;
+            
+            float throwAngle = Vector2.Angle(transform.up, toMouseVector);
+            if (throwAngle <= 90)
+            {
+                GameObject newStone = Instantiate(genericStone, (Vector2) this.transform.position + toMouseVector * 0.6f, this.transform.rotation);
+            }
             currentStoneType++;
         }
         _isShooting = false;

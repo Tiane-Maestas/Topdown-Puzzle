@@ -10,9 +10,9 @@ namespace StoneTypes
             this.stoneTextureLocation = "Stones/normal-stone";
         }
 
-        public override void ThrowStone()
+        public override void ThrowStone(Vector2 throwVector)
         {
-            base.ThrowStone();
+            base.ThrowStone(throwVector);
         }
 
         public override void OnCollisionEnter(Collision2D other)

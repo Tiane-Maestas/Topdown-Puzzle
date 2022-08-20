@@ -29,9 +29,9 @@ namespace StoneTypes
             this._stoneBody = stoneBody;
         }
 
-        public virtual void ThrowStone()
+        public virtual void ThrowStone(Vector2 throwVector)
         {
-            this._stoneBody.velocity = _stoneBody.transform.up * this._stoneSpeed;
+            this._stoneBody.velocity = throwVector * this._stoneSpeed;
         }
 
         public virtual void OnCollisionEnter(Collision2D other)

@@ -7,6 +7,7 @@ public class ActiveStone : MonoBehaviour
 
     // Gives the ability to set the current type of stone from a static StoneType.
     public static StoneType currentStoneBehaviour = StoneType.Normal;
+    public static Vector2 throwVector;
 
     // Specific to each individual class instance.
     private StoneBehaviour _stoneBehaviour;
@@ -49,7 +50,7 @@ public class ActiveStone : MonoBehaviour
 
     private void Start()
     {
-        this._stoneBehaviour.ThrowStone();
+        this._stoneBehaviour.ThrowStone(throwVector);
         Destroy(this.gameObject, _stoneDestroyDelay);
     }
 
