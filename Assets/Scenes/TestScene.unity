@@ -284,6 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   genericStone: {fileID: 1346547803890565600, guid: b2e64ee0cccbd724d989ebe5218a7507, type: 3}
+  currentStoneType: 0
 --- !u!212 &631958670
 SpriteRenderer:
   m_ObjectHideFlags: 0
