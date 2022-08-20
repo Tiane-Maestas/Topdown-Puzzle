@@ -11,9 +11,5 @@ public class PlayerControllerInspectorEditor : Editor
 
         EditorGUILayout.LabelField("Press to toggle different player controller system");
         PlayerController playerController = (PlayerController) target;
-        if (GUILayout.Button("Switch player controller system"))
-        {
-            playerController.SwitchPlayerControllerSystem();
-        }
     }
 }

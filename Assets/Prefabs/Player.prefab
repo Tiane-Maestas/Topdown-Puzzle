@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5874970890072367267}
   - component: {fileID: 7100563558929654178}
   - component: {fileID: 3765817328758103771}
+  - component: {fileID: 1046892373}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -133,7 +134,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &3765817328758103771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,3 +149,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genericStone: {fileID: 1346547803890565600, guid: b2e64ee0cccbd724d989ebe5218a7507, type: 3}
   currentStoneType: 0
+--- !u!114 &1046892373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650295819365455732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b52b4f817c44e4fb95ff98a8172fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  rb: {fileID: 7100563558929654178}
+  cam: {fileID: 0}

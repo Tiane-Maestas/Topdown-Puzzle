@@ -10,8 +10,6 @@ public class PlayerController : MonoBehaviour
     Vector2 movement;
     Vector2 mousePos;
 
-    public bool playerControllerSystem = true; // true for follow mouse
-
     // Update is called once per frame
     void Update()
     {
@@ -25,23 +23,10 @@ public class PlayerController : MonoBehaviour
     {
         rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
 
-        if (playerControllerSystem)
+        if (movement != Vector2.zero)
         {
-            Vector2 lookDir = mousePos - rb.position;
-            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
-            rb.rotation = angle;
+            rb.rotation = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg - 90f;
         }
-        else
-        {
-            if (movement != Vector2.zero)
-            {
-                rb.rotation = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg - 90f;
-            }
-        }
-    }
 
-    public void SwitchPlayerControllerSystem()
-    {
-        playerControllerSystem = !playerControllerSystem;
     }
 }
