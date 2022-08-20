@@ -21,7 +21,7 @@ public class PlayerProjectileController : MonoBehaviour
     {
         if (_isShooting)
         {
-            if ((int)currentStoneType >= 7)
+            if ((int)currentStoneType >= 6)
             {
                 currentStoneType = StoneType.Normal;
             }
