@@ -30,7 +30,7 @@ namespace StoneTypes
         public override void OnCollisionEnter(Collision2D other)
         {
             _currentNumberOfBounces++;
-            if (_currentNumberOfBounces >= _maxNumberOfBounces)
+            if (_currentNumberOfBounces > _maxNumberOfBounces)
             {
                 GameObject.Destroy(this._stoneBody.gameObject);
             }

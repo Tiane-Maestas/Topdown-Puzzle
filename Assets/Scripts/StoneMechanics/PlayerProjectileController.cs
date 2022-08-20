@@ -9,7 +9,7 @@ public class PlayerProjectileController : MonoBehaviour
 
     private void Start()
     {
-        currentStoneType = StoneType.Normal;
+        // currentStoneType = StoneType.Normal;
     }
 
     private void Update()
