@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using StoneTypes;
 
 public class PlayerProjectileController : MonoBehaviour
 {
     public GameObject genericStone;
+    public StoneType currentStoneType;
     private bool _isShooting = false;
-
-    public int index = 0;
 
     private void Start()
     {
-
+        currentStoneType = StoneType.Normal;
     }
 
     private void Update()
@@ -23,13 +21,13 @@ public class PlayerProjectileController : MonoBehaviour
     {
         if (_isShooting)
         {
-            if (index >= 7)
+            if ((int)currentStoneType >= 7)
             {
-                index = 0;
+                currentStoneType = StoneType.Normal;
             }
-            ActiveStone.currentStoneBehaviour = index;
-            index++;
+            ActiveStone.currentStoneBehaviour = currentStoneType;
             GameObject newStone = Instantiate(genericStone, this.transform.position, this.transform.rotation);
+            currentStoneType++;
         }
         _isShooting = false;
     }

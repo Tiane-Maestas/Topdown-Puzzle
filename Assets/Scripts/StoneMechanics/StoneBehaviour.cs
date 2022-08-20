@@ -1,38 +1,58 @@
 using UnityEngine;
 
-public class StoneBehaviour
+namespace StoneTypes
 {
-    // For stone movement.
-    protected Rigidbody2D _stoneBody;
-    protected float _stoneSpeed = 10f;
-
-    // For stone graphics.
-    public string stoneTextureLocation;
-
-    public StoneBehaviour()
+    // Using the Strategy Pattern for different types of stones.
+    public enum StoneType
     {
-        stoneTextureLocation = "Stones/normal-stone";
+        Normal,
+        Fire,
+        Explosion,
+        Bounce,
+        Teleport,
+        MindControl,
+        Joker
     }
 
-    public virtual void ThrowStone(Rigidbody2D stoneBody)
+    public class StoneBehaviour
     {
-        this._stoneBody = stoneBody;
-        this._stoneBody.velocity = _stoneBody.transform.up * this._stoneSpeed;
-    }
+        // For stone movement.
+        protected Rigidbody2D _stoneBody;
+        protected float _stoneSpeed = 10f;
 
-    public virtual void OnCollisionEnter(Collision collision)
-    {
+        // For stone graphics.
+        public string stoneTextureLocation;
 
-    }
+        public StoneBehaviour(Rigidbody2D stoneBody)
+        {
+            stoneTextureLocation = "Stones/normal-stone";
+            this._stoneBody = stoneBody;
+        }
 
-    public virtual void Update()
-    {
+        public virtual void ThrowStone()
+        {
+            this._stoneBody.velocity = _stoneBody.transform.up * this._stoneSpeed;
+        }
 
-    }
+        public virtual void OnCollisionEnter(Collision2D other)
+        {
 
-    public virtual void FixedUpdate()
-    {
+        }
 
+        public virtual void Update()
+        {
+
+        }
+
+        public virtual void FixedUpdate()
+        {
+
+        }
+
+        public virtual void Destroy()
+        {
+
+        }
     }
 }
 

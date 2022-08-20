@@ -4,20 +4,20 @@ namespace StoneTypes
 {
     public class JokerStone : StoneBehaviour
     {
-        public JokerStone() : base()
+        public JokerStone(Rigidbody2D stoneBody) : base(stoneBody)
         {
             this._stoneSpeed = 10f;
             this.stoneTextureLocation = "Stones/joker-stone";
         }
 
-        public override void ThrowStone(Rigidbody2D stoneBody)
+        public override void ThrowStone()
         {
-            base.ThrowStone(stoneBody);
+            base.ThrowStone();
         }
 
-        public override void OnCollisionEnter(Collision collision)
+        public override void OnCollisionEnter(Collision2D other)
         {
-            base.OnCollisionEnter(collision);
+            base.OnCollisionEnter(other);
         }
 
         public override void Update()
@@ -28,6 +28,11 @@ namespace StoneTypes
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
         }
     }
 }
