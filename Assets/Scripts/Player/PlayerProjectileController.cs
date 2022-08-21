@@ -35,6 +35,7 @@ public class PlayerProjectileController : MonoBehaviour
             float throwAngle = Vector2.Angle(transform.up, toMouseVector);
             if (throwAngle <= 90)
             {
+                // TODO magic number is a small distance to spawn stone away from player
                 GameObject newStone = Instantiate(genericStone, (Vector2) this.transform.position + toMouseVector * 0.6f, this.transform.rotation);
             }
             currentStoneType++;
