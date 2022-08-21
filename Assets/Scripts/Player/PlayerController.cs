@@ -5,28 +5,37 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public Rigidbody2D rb;
-    public Camera cam;
+    private Rigidbody2D _playerBody;
     Vector2 movement;
-    // Vector2 mousePos;
+    private Animator _animator;
 
-    // Update is called once per frame
+    private void Awake()
+    {
+        _playerBody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-
-        // mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
     }
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
+        _playerBody.MovePosition(_playerBody.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
 
         if (movement != Vector2.zero)
         {
-            rb.rotation = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg - 90f;
+            // Lerp Here
+            _animator.SetBool("Idle", false);
+            _animator.SetBool("Walking", true);
+            _playerBody.rotation = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg - 90f;
         }
-
+        else
+        {
+            _animator.SetBool("Walking", false);
+            _animator.SetBool("Idle", true);
+        }
     }
 }

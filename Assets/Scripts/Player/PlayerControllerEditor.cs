@@ -8,8 +8,8 @@ public class PlayerControllerInspectorEditor : Editor
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
+        PlayerController playerController = (PlayerController)target;
 
-        EditorGUILayout.LabelField("Press to toggle different player controller system");
-        PlayerController playerController = (PlayerController) target;
+        // EditorGUILayout.LabelField("Press to toggle different player controller system");
     }
 }
