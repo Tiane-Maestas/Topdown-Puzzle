@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 9059803769687603187}
   - component: {fileID: 5874970890072367267}
   - component: {fileID: 7100563558929654178}
-  - component: {fileID: 8550051775033404124}
-  - component: {fileID: 4688024321255242027}
-  - component: {fileID: 5450474394912089314}
+  - component: {fileID: 1885461415}
+  - component: {fileID: 1885461422}
+  - component: {fileID: 1885461423}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -136,34 +136,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &8550051775033404124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1650295819365455732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0399e82c07bfdac44ab9637d572e9ad8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genericStone: {fileID: 1346547803890565600, guid: b2e64ee0cccbd724d989ebe5218a7507, type: 3}
-  currentStoneType: 3
---- !u!114 &4688024321255242027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1650295819365455732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01eb65495617d594a9504284447a82d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4
---- !u!95 &5450474394912089314
+--- !u!95 &1885461415
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -173,7 +146,7 @@ Animator:
   m_GameObject: {fileID: 1650295819365455732}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7c63414141203b84c8f14d74993f9896, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3d06784fc7d122d4bb778f0708e6eb74, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -183,3 +156,30 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1885461422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650295819365455732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2a2883415cb68043b7b3dcb747e9359, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  genericStone: {fileID: 1346547803890565600, guid: b2e64ee0cccbd724d989ebe5218a7507, type: 3}
+  currentStoneType: 0
+--- !u!114 &1885461423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650295819365455732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b52b4f817c44e4fb95ff98a8172fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5

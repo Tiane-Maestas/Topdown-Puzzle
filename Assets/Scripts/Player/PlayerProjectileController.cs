@@ -5,8 +5,9 @@ public class PlayerProjectileController : MonoBehaviour
 {
     public GameObject genericStone;
     public StoneType currentStoneType;
-    private bool _isShooting = false;
-    private bool _wasShooting = false;
+    private bool _isSlinging = false;
+    private bool _hold = false;
+    private bool _isRelease = false;
     private float _throwOffset;
     private Animator _animator;
 
@@ -22,27 +23,26 @@ public class PlayerProjectileController : MonoBehaviour
 
     private void Update()
     {
-        _isShooting = Input.GetMouseButton(0);
-        Debug.Log(Input.GetMouseButton(0));
+        _isSlinging = Input.GetMouseButton(0);
     }
 
     private void FixedUpdate()
     {
         // Animate if charging shot.
-        if (_isShooting)
+        _animator.SetBool("isSlinging", _isSlinging);
+
+        if (_hold && !_isSlinging)
         {
-            _wasShooting = true;
-            _animator.SetBool("Idle", false);
-            _animator.SetBool("Slinging", true);
+            _isRelease = true;
+            _hold = false;
         }
-        else
+        else if (_isSlinging) 
         {
-            _animator.SetBool("Idle", true);
-            _animator.SetBool("Slinging", false);
+            _hold = true;
         }
 
         // Shoot Stone on Release
-        if (!_isShooting && _wasShooting)
+        if (_isRelease)
         {
             // Aim with mouse
             Vector2 toMouseVector = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - (Vector2)transform.position;
@@ -55,7 +55,8 @@ public class PlayerProjectileController : MonoBehaviour
             ActiveStone.currentStoneBehaviour = currentStoneType;
             GameObject newStone = Instantiate(genericStone, (Vector2)this.transform.position + toMouseVector * _throwOffset, this.transform.rotation);
 
-            _wasShooting = false;
+            _isRelease = false;
+            _isSlinging = false;
         }
     }
 }
