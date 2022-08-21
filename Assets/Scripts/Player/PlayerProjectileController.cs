@@ -21,12 +21,23 @@ public class PlayerProjectileController : MonoBehaviour
     {
         if (_isShooting)
         {
-            if ((int)currentStoneType >= 7)
+            if ((int)currentStoneType >= 6)
             {
                 currentStoneType = StoneType.Normal;
             }
             ActiveStone.currentStoneBehaviour = currentStoneType;
-            GameObject newStone = Instantiate(genericStone, this.transform.position, this.transform.rotation);
+
+            // aim with mouse
+            Vector2 toMouseVector = (Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition) - (Vector2) transform.position;
+            toMouseVector.Normalize();
+            ActiveStone.throwVector = toMouseVector;
+            
+            float throwAngle = Vector2.Angle(transform.up, toMouseVector);
+            if (throwAngle <= 90)
+            {
+                // TODO magic number is a small distance to spawn stone away from player
+                GameObject newStone = Instantiate(genericStone, (Vector2) this.transform.position + toMouseVector * 0.6f, this.transform.rotation);
+            }
             currentStoneType++;
         }
         _isShooting = false;

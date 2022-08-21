@@ -22,9 +22,9 @@ namespace StoneTypes
             _stoneCollider.sharedMaterial = this._stoneMaterial;
         }
 
-        public override void ThrowStone()
+        public override void ThrowStone(Vector2 throwVector)
         {
-            base.ThrowStone();
+            base.ThrowStone(throwVector);
         }
 
         public override void OnCollisionEnter(Collision2D other)
