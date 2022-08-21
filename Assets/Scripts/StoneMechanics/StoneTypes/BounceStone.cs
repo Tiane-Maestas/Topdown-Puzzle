@@ -10,7 +10,7 @@ namespace StoneTypes
         private CircleCollider2D _stoneCollider;
         public BounceStone(Rigidbody2D stoneBody) : base(stoneBody)
         {
-            this._stoneSpeed = 10;
+            this._stoneSpeed = 10f;
             this.stoneTextureLocation = "Stones/bounce-stone";
             // Create a bouncy material.
             this._stoneMaterial = new PhysicsMaterial2D("Bouncy");
@@ -34,7 +34,6 @@ namespace StoneTypes
             {
                 GameObject.Destroy(this._stoneBody.gameObject);
             }
-            base.OnCollisionEnter(other);
         }
 
         public override void Update()

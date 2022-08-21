@@ -36,7 +36,7 @@ namespace StoneTypes
 
         public virtual void OnCollisionEnter(Collision2D other)
         {
-
+            GameObject.Destroy(this._stoneBody.gameObject);
         }
 
         public virtual void Update()
