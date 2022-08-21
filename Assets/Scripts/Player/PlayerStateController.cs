@@ -60,9 +60,12 @@ public class PlayerStateController : MonoBehaviour
 
     private void Update()
     {
-        this._stateMachine.UpdateState();
         // Note: the movement vector is handled here becuae it would have to be updated in every state.
+        // IMPORTANT: The player input should always be checked first because the current frame behaviour
+        // depends on that input. If it is checked last then you have to wait a whole new frame for the
+        // input to effect the behvaiour on screen.
         UpdateMovementVector();
+        this._stateMachine.UpdateState();
     }
 
     private void UpdateMovementVector()
