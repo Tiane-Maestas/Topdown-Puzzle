@@ -4,7 +4,7 @@ namespace StoneTypes
 {
     public class BounceStone : StoneBehaviour
     {
-        private static int _maxNumberOfBounces = 5;
+        private static int _maxNumberOfBounces = 1;
         private int _currentNumberOfBounces = 0;
         private PhysicsMaterial2D _stoneMaterial;
         private CircleCollider2D _stoneCollider;
@@ -30,11 +30,11 @@ namespace StoneTypes
 
         public override void OnCollisionEnter(Collision2D other)
         {
-            _currentNumberOfBounces++;
-            if (_currentNumberOfBounces > _maxNumberOfBounces)
+            if (_currentNumberOfBounces >= _maxNumberOfBounces)
             {
                 GameObject.Destroy(this._stoneBody.gameObject);
             }
+            _currentNumberOfBounces++;
         }
 
         public override void Update()
