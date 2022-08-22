@@ -155,8 +155,8 @@ public class PlayerStateController : MonoBehaviour
         Vector2 rightHand = transform.up;
         rightHand = Utils2D.RotateVector2ByRad(rightHand, _rightHandAngle);
         rightHand.Normalize();
-        Debug.Log(rightHand);
 
+        // Set Stone Type
         ActiveStone.throwVector = toMouseVector;
         ActiveStone.currentStoneBehaviour = currentStoneType;
         GameObject newStone = Instantiate(genericStone, (Vector2)this.transform.position + rightHand * _throwOffset, this.transform.rotation);

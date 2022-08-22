@@ -25,13 +25,15 @@ namespace Nebula
 
         public static Vector2 RotateVector2ByRad(Vector2 vector, float angle)
         {
-            return new Vector2(vector.x * Mathf.Cos(angle), vector.y * Mathf.Sin(angle));
+            return new Vector2((vector.x * Mathf.Cos(angle)) - (Mathf.Sin(angle) * vector.y),
+                               (vector.x * Mathf.Sin(angle)) + (Mathf.Cos(angle) * vector.y));
         }
 
         public static Vector2 RotateVector2ByDeg(Vector2 vector, float angle)
         {
             angle *= Mathf.Deg2Rad;
-            return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+            return new Vector2((vector.x * Mathf.Cos(angle)) - (Mathf.Sin(angle) * vector.y),
+                               (vector.x * Mathf.Sin(angle)) + (Mathf.Cos(angle) * vector.y));
         }
 
         public static Texture2D LoadTextureFromFile(string filePath)
