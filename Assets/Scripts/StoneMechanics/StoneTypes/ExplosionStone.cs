@@ -4,13 +4,17 @@ namespace StoneTypes
 {
     public class ExplosionStone : StoneBehaviour
     {
-        private GameObject _debris;
+        // Uses collider of this game object as a trigger.
+        private GameObject _explosionArea;
+        // Visiual effects from particle system.
+        private GameObject _explosionVisuals;
         public ExplosionStone(Rigidbody2D stoneBody) : base(stoneBody)
         {
             stoneBody.gameObject.tag = StoneTags.Explosion;
             this._stoneSpeed = 10f;
             this.stoneTextureLocation = "Stones/explosion-stone";
-            _debris = (GameObject)Resources.Load("Prefabs/Debris", typeof(GameObject));
+            _explosionArea = (GameObject)Resources.Load("Prefabs/ExplosionArea", typeof(GameObject));
+            _explosionVisuals = (GameObject)Resources.Load("Prefabs/Explosion", typeof(GameObject));
         }
 
         public override void ThrowStone(Vector2 throwVector)
@@ -35,8 +39,10 @@ namespace StoneTypes
 
         public override void Destroy()
         {
-            GameObject.Instantiate(_debris, this._stoneBody.transform.position, this._stoneBody.transform.rotation);
-            // this._stoneBody.transform.position
+            GameObject explosionArea = GameObject.Instantiate(_explosionArea, this._stoneBody.transform.position, this._stoneBody.transform.rotation);
+            GameObject.Destroy(explosionArea, 0.5f);
+            GameObject explosionVisuals = GameObject.Instantiate(_explosionVisuals, this._stoneBody.transform.position, this._stoneBody.transform.rotation);
+            GameObject.Destroy(explosionVisuals, 0.5f);
             base.Destroy();
         }
     }
