@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Enviornement
   - Stone
+  - Explosion-Stone
+  - Fire-Stone
+  - Bounce-Stone
+  - Teleport-Stone
+  - Mind-Control-Stone
+  - Joker-Stone
   layers:
   - Default
   - TransparentFX

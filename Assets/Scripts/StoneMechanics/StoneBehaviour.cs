@@ -14,6 +14,17 @@ namespace StoneTypes
         Joker
     }
 
+    public static class StoneTags
+    {
+        public static string Normal = "Stone";
+        public static string Fire = "Fire-Stone";
+        public static string Explosion = "Explosion-Stone";
+        public static string Bounce = "Bounce-Stone";
+        public static string Teleport = "Teleport-Stone";
+        public static string MindControl = "Mind-Control-Stone";
+        public static string Joker = "Joker-Stone";
+    }
+
     public class StoneBehaviour
     {
         // For stone movement.

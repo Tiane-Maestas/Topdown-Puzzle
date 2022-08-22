@@ -119,7 +119,7 @@ public class PlayerStateController : MonoBehaviour
     public GameObject genericStone;
     public StoneType currentStoneType;
     private float _throwOffset;
-    private Vector2 _rightHand;
+    private float _rightHandAngle;
     private void ConfigureSlingingState()
     {
         // Calculation so the stone doesn't collide with player initially.
@@ -128,8 +128,7 @@ public class PlayerStateController : MonoBehaviour
         _throwOffset = Mathf.Abs(Mathf.Pow(playerCollider.bounds.max.x + stoneCollider.radius / 2, 2) + Mathf.Pow(playerCollider.bounds.max.x + stoneCollider.radius / 2, 2));
 
         // We always throw from the right hand. (Where the sling is)
-        _rightHand = new Vector2(playerCollider.bounds.max.x, -playerCollider.bounds.max.y);
-        _rightHand.Normalize();
+        _rightHandAngle = Mathf.Atan(playerCollider.bounds.max.y / playerCollider.bounds.max.x);
     }
     private bool SlingingStateCondition()
     {
@@ -152,10 +151,15 @@ public class PlayerStateController : MonoBehaviour
         float throwAngle = Vector2.Angle(transform.up, toMouseVector);
         toMouseVector = (throwAngle <= 90) ? toMouseVector : -toMouseVector;
 
-        // Shoot Stone
+        // Shoot Stone from Right Hand.
+        Vector2 rightHand = transform.up;
+        rightHand = Utils2D.RotateVector2ByRad(rightHand, _rightHandAngle);
+        rightHand.Normalize();
+        Debug.Log(rightHand);
+
         ActiveStone.throwVector = toMouseVector;
         ActiveStone.currentStoneBehaviour = currentStoneType;
-        GameObject newStone = Instantiate(genericStone, (Vector2)this.transform.position + _rightHand * _throwOffset, this.transform.rotation);
+        GameObject newStone = Instantiate(genericStone, (Vector2)this.transform.position + rightHand * _throwOffset, this.transform.rotation);
     }
 
     #endregion

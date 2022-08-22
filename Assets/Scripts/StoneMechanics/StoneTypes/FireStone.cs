@@ -6,6 +6,7 @@ namespace StoneTypes
     {
         public FireStone(Rigidbody2D stoneBody) : base(stoneBody)
         {
+            stoneBody.gameObject.tag = StoneTags.Fire;
             this._stoneSpeed = 10f;
             this.stoneTextureLocation = "Stones/fire-stone";
         }

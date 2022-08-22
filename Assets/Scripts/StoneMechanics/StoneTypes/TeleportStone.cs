@@ -6,6 +6,7 @@ namespace StoneTypes
     {
         public TeleportStone(Rigidbody2D stoneBody) : base(stoneBody)
         {
+            stoneBody.gameObject.tag = StoneTags.Teleport;
             this._stoneSpeed = 10f;
             this.stoneTextureLocation = "Stones/teleport-stone";
         }

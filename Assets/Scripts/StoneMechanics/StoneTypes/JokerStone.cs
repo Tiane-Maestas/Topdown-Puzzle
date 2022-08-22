@@ -6,6 +6,7 @@ namespace StoneTypes
     {
         public JokerStone(Rigidbody2D stoneBody) : base(stoneBody)
         {
+            stoneBody.gameObject.tag = StoneTags.Joker;
             this._stoneSpeed = 10f;
             this.stoneTextureLocation = "Stones/joker-stone";
         }

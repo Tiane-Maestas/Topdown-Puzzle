@@ -6,6 +6,7 @@ namespace StoneTypes
     {
         public ExplosionStone(Rigidbody2D stoneBody) : base(stoneBody)
         {
+            stoneBody.gameObject.tag = StoneTags.Explosion;
             this._stoneSpeed = 10f;
             this.stoneTextureLocation = "Stones/explosion-stone";
         }

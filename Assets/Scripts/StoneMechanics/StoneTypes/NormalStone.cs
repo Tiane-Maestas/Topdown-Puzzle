@@ -6,6 +6,7 @@ namespace StoneTypes
     {
         public NormalStone(Rigidbody2D stoneBody) : base(stoneBody)
         {
+            stoneBody.gameObject.tag = StoneTags.Normal;
             this._stoneSpeed = 10f;
             this.stoneTextureLocation = "Stones/normal-stone";
         }
