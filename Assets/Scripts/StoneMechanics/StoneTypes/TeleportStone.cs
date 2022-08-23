@@ -37,6 +37,9 @@ namespace StoneTypes
             GameObject _player = GameObject.FindWithTag("Player");
             _player.transform.SetPositionAndRotation(stonePosition, _player.transform.rotation);
             base.Destroy();
+            
+            AudioClip _teleportSound = Resources.Load<AudioClip>("Sound/teleport");
+            SoundManager.PlaySound(_teleportSound, 0.7f);
         }
     }
 }
