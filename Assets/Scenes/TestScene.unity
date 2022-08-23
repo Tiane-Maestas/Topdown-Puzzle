@@ -222,7 +222,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3203,7 +3203,7 @@ GameObject:
   - component: {fileID: 1593420678}
   m_Layer: 0
   m_Name: Middleground
-  m_TagString: Enviornement
+  m_TagString: Enviornment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7093,7 +7093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1709838544358951900, guid: 421982e470167d046b17bd3b8ddba4b6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1709838544358951900, guid: 421982e470167d046b17bd3b8ddba4b6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7127,9 +7127,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5874970890072367267, guid: 421982e470167d046b17bd3b8ddba4b6, type: 3}
+      propertyPath: m_Size.y
+      value: 0.37562335
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874970890072367267, guid: 421982e470167d046b17bd3b8ddba4b6, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874970890072367267, guid: 421982e470167d046b17bd3b8ddba4b6, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7132489031949791691, guid: 421982e470167d046b17bd3b8ddba4b6, type: 3}
       propertyPath: currentStoneType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7132489031949791691, guid: 421982e470167d046b17bd3b8ddba4b6, type: 3}
+      propertyPath: _minDistanceToWall
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7132489031949791691, guid: 421982e470167d046b17bd3b8ddba4b6, type: 3}
+      propertyPath: _minChestDistanceToWall
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7132489031949791691, guid: 421982e470167d046b17bd3b8ddba4b6, type: 3}
+      propertyPath: _minRightArmDistanceToWall
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 421982e470167d046b17bd3b8ddba4b6, type: 3}
