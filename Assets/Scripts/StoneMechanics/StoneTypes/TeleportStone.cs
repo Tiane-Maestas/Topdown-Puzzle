@@ -33,6 +33,9 @@ namespace StoneTypes
 
         public override void Destroy()
         {
+            Vector2 stonePosition = this._stoneBody.position;
+            GameObject _player = GameObject.FindWithTag("Player");
+            _player.transform.SetPositionAndRotation(stonePosition, _player.transform.rotation);
             base.Destroy();
         }
     }
