@@ -6,6 +6,7 @@ using StoneTypes;
 public class PlayerStateController : MonoBehaviour
 {
     private Rigidbody2D _playerBody;
+    private BoxCollider2D _playerCollider;
 
     // All state machine vaiables.
     private GStateMachine _stateMachine;
@@ -18,9 +19,15 @@ public class PlayerStateController : MonoBehaviour
 
     private Vector2 _movement;
 
+    // Variables to not allow for player to throw near wall.
+    [SerializeField] private float _minChestDistanceToWall = 1f;
+    [SerializeField] private float _minRightArmDistanceToWall = 1f;
+    private bool _againstWall = false;
+
     private void Awake()
     {
         this._playerBody = GetComponent<Rigidbody2D>();
+        this._playerCollider = GetComponent<BoxCollider2D>();
         this._animator = GetComponent<Animator>();
 
         // Initialize the player states w/ the state machine
@@ -65,6 +72,7 @@ public class PlayerStateController : MonoBehaviour
         // depends on that input. If it is checked last then you have to wait a whole new frame for the
         // input to effect the behvaiour on screen.
         UpdateMovementVector();
+        CheckAgainstWall();
         this._stateMachine.UpdateState();
     }
 
@@ -73,6 +81,27 @@ public class PlayerStateController : MonoBehaviour
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
         _movement.Normalize();
+    }
+
+    private void CheckAgainstWall()
+    {
+        // Check if the player hits the enviornment. Check Right and Up so they can't throw it out of the map.
+        RaycastHit2D[] chestHit = Physics2D.RaycastAll(this.gameObject.transform.position, this.gameObject.transform.up, this._minChestDistanceToWall);
+        Debug.DrawRay(this.gameObject.transform.position, this.gameObject.transform.up * this._minChestDistanceToWall, Color.green);
+
+        RaycastHit2D[] rightArmHit = Physics2D.RaycastAll(this.gameObject.transform.position, this.gameObject.transform.right, this._minRightArmDistanceToWall);
+        Debug.DrawRay(this.gameObject.transform.position, this.gameObject.transform.right * this._minRightArmDistanceToWall, Color.green);
+
+        if ((chestHit.Length > 1 && chestHit[chestHit.Length - 1].collider.tag == "Enviornment") ||
+            (rightArmHit.Length > 1 && rightArmHit[rightArmHit.Length - 1].collider.tag == "Enviornment"))
+        {
+            _againstWall = true;
+        }
+        else
+        {
+            _againstWall = false;
+        }
+        Debug.Log(_againstWall);
     }
 
     private void FixedUpdate()
@@ -132,12 +161,12 @@ public class PlayerStateController : MonoBehaviour
     }
     private bool SlingingStateCondition()
     {
-        return Input.GetMouseButton(0);
+        return Input.GetMouseButton(0) && !_againstWall;
     }
 
     private void LeaveSlingingState()
     {
-        if (!Input.GetMouseButton(0))
+        if (!Input.GetMouseButton(0) && !_againstWall)
         {
             ThrowStone();
         }
@@ -168,7 +197,7 @@ public class PlayerStateController : MonoBehaviour
 
     private bool WalkingSlingingStateCondition()
     {
-        return Input.GetMouseButton(0) && _movement != Vector2.zero;
+        return Input.GetMouseButton(0) && _movement != Vector2.zero && !_againstWall;
     }
 
     private void WalkingSlingingStateAction()
@@ -178,7 +207,7 @@ public class PlayerStateController : MonoBehaviour
 
     private void LeaveWalkingSlingingState()
     {
-        if (!Input.GetMouseButton(0))
+        if (!Input.GetMouseButton(0) && !_againstWall)
         {
             ThrowStone();
         }
