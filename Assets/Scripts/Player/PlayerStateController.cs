@@ -6,7 +6,6 @@ using StoneTypes;
 public class PlayerStateController : MonoBehaviour
 {
     private Rigidbody2D _playerBody;
-    private BoxCollider2D _playerCollider;
 
     // All state machine vaiables.
     private GStateMachine _stateMachine;
@@ -27,7 +26,6 @@ public class PlayerStateController : MonoBehaviour
     private void Awake()
     {
         this._playerBody = GetComponent<Rigidbody2D>();
-        this._playerCollider = GetComponent<BoxCollider2D>();
         this._animator = GetComponent<Animator>();
 
         // Initialize the player states w/ the state machine
@@ -92,8 +90,17 @@ public class PlayerStateController : MonoBehaviour
         RaycastHit2D[] rightArmHit = Physics2D.RaycastAll(this.gameObject.transform.position, this.gameObject.transform.right, this._minRightArmDistanceToWall);
         Debug.DrawRay(this.gameObject.transform.position, this.gameObject.transform.right * this._minRightArmDistanceToWall, Color.green);
 
+        // Edge Case if walking with w and s up a wall.
+        _rightHand = transform.right;
+        _rightHand = Utils2D.RotateVector2ByRad(_rightHand, _rightHandAngle);
+        _rightHand.Normalize();
+
+        RaycastHit2D[] rightShoulderHit = Physics2D.RaycastAll(this.gameObject.transform.position, _rightHand, _throwOffset);
+        Debug.DrawRay(this.gameObject.transform.position, _rightHand * _throwOffset, Color.green);
+
         if ((chestHit.Length > 1 && chestHit[chestHit.Length - 1].collider.tag == "Enviornment") ||
-            (rightArmHit.Length > 1 && rightArmHit[rightArmHit.Length - 1].collider.tag == "Enviornment"))
+            (rightArmHit.Length > 1 && rightArmHit[rightArmHit.Length - 1].collider.tag == "Enviornment") ||
+            (rightShoulderHit.Length > 1 && rightShoulderHit[rightShoulderHit.Length - 1].collider.tag == "Enviornment"))
         {
             _againstWall = true;
         }
@@ -101,7 +108,6 @@ public class PlayerStateController : MonoBehaviour
         {
             _againstWall = false;
         }
-        Debug.Log(_againstWall);
     }
 
     private void FixedUpdate()
@@ -149,15 +155,16 @@ public class PlayerStateController : MonoBehaviour
     public StoneType currentStoneType;
     private float _throwOffset;
     private float _rightHandAngle;
+    private Vector2 _rightHand;
     private void ConfigureSlingingState()
     {
         // Calculation so the stone doesn't collide with player initially.
         BoxCollider2D playerCollider = GetComponent<BoxCollider2D>();
         CircleCollider2D stoneCollider = genericStone.GetComponent<CircleCollider2D>();
-        _throwOffset = Mathf.Abs(Mathf.Pow(playerCollider.bounds.max.x + stoneCollider.radius / 2, 2) + Mathf.Pow(playerCollider.bounds.max.x + stoneCollider.radius / 2, 2));
+        _throwOffset = Mathf.Sqrt(Mathf.Pow(playerCollider.bounds.extents.x, 2) + Mathf.Pow(playerCollider.bounds.extents.y, 2)) + stoneCollider.radius;
 
         // We always throw from the right hand. (Where the sling is)
-        _rightHandAngle = Mathf.Atan(playerCollider.bounds.max.y / playerCollider.bounds.max.x);
+        _rightHandAngle = Mathf.Atan(playerCollider.bounds.extents.y / playerCollider.bounds.extents.x);
     }
     private bool SlingingStateCondition()
     {
@@ -181,14 +188,14 @@ public class PlayerStateController : MonoBehaviour
         toMouseVector = (throwAngle <= 90) ? toMouseVector : -toMouseVector;
 
         // Shoot Stone from Right Hand.
-        Vector2 rightHand = transform.up;
-        rightHand = Utils2D.RotateVector2ByRad(rightHand, _rightHandAngle);
-        rightHand.Normalize();
+        _rightHand = transform.right;
+        _rightHand = Utils2D.RotateVector2ByRad(_rightHand, _rightHandAngle);
+        _rightHand.Normalize();
 
         // Set Stone Type
         ActiveStone.throwVector = toMouseVector;
         ActiveStone.currentStoneBehaviour = currentStoneType;
-        GameObject newStone = Instantiate(genericStone, (Vector2)this.transform.position + rightHand * _throwOffset, this.transform.rotation);
+        GameObject newStone = Instantiate(genericStone, (Vector2)this.transform.position + _rightHand * _throwOffset, this.transform.rotation);
     }
 
     #endregion
