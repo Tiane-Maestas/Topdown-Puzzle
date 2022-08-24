@@ -33,11 +33,15 @@ namespace StoneTypes
 
         // For stone graphics.
         public string stoneTextureLocation;
+        private GameObject _breakVisuals;
+        private float _breakTimeDuration = 0.25f;
 
         public StoneBehaviour(Rigidbody2D stoneBody)
         {
             stoneTextureLocation = "Stones/normal-stone";
             this._stoneBody = stoneBody;
+            _breakVisuals = (GameObject)Resources.Load("Prefabs/BreakStone", typeof(GameObject));
+            _breakTimeDuration = _breakVisuals.GetComponent<ParticleSystem>().main.duration;
         }
 
         public virtual void ThrowStone(Vector2 throwVector)
@@ -62,7 +66,8 @@ namespace StoneTypes
 
         public virtual void Destroy()
         {
-
+            GameObject breakVisuals = GameObject.Instantiate(_breakVisuals, this._stoneBody.transform.position, this._stoneBody.transform.rotation);
+            GameObject.Destroy(breakVisuals, _breakTimeDuration);
         }
     }
 }
