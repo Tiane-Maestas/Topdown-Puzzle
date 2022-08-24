@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace StoneTypes
@@ -23,6 +24,22 @@ namespace StoneTypes
         public static string Teleport = "Teleport-Stone";
         public static string MindControl = "Mind-Control-Stone";
         public static string Joker = "Joker-Stone";
+    }
+
+    public static class JokerAudios
+    {
+        public static List<AudioClip> jokerAudioList = new List<AudioClip>();
+
+        static JokerAudios()
+        {
+            jokerAudioList.Add(Resources.Load<AudioClip>("Sound/joker/amongus"));
+            jokerAudioList.Add(Resources.Load<AudioClip>("Sound/joker/boom"));
+            jokerAudioList.Add(Resources.Load<AudioClip>("Sound/joker/cap"));
+            jokerAudioList.Add(Resources.Load<AudioClip>("Sound/joker/joker"));
+            jokerAudioList.Add(Resources.Load<AudioClip>("Sound/joker/minecraft_death"));
+            jokerAudioList.Add(Resources.Load<AudioClip>("Sound/joker/saul"));
+            jokerAudioList.Add(Resources.Load<AudioClip>("Sound/joker/tom_scream"));
+        }
     }
 
     public class StoneBehaviour

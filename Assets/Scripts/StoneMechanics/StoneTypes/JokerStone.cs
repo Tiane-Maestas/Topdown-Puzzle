@@ -9,6 +9,7 @@ namespace StoneTypes
             stoneBody.gameObject.tag = StoneTags.Joker;
             this._stoneSpeed = 10f;
             this.stoneTextureLocation = "Stones/joker-stone";
+
         }
 
         public override void ThrowStone(Vector2 throwVector)
@@ -33,6 +34,11 @@ namespace StoneTypes
 
         public override void Destroy()
         {
+            // random audio
+            int randInt = Random.Range(0, JokerAudios.jokerAudioList.Count);
+            AudioClip audio = JokerAudios.jokerAudioList[randInt];
+            SoundManager.PlaySound(audio, 1f);
+
             base.Destroy();
         }
     }
