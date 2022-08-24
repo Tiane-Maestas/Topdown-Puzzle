@@ -33,6 +33,9 @@ namespace StoneTypes
 
         public override void Destroy()
         {
+            AudioClip _breakSound = Resources.Load<AudioClip>("Sound/minecraft_stone");
+            SoundManager.PlaySound(_breakSound, 1f);
+
             base.Destroy();
         }
     }
