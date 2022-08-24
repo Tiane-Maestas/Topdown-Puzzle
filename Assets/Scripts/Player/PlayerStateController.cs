@@ -18,10 +18,8 @@ public class PlayerStateController : MonoBehaviour
 
     private Vector2 _movement;
 
-    // Variables to not allow for player to throw near wall.
-    [SerializeField] private float _minChestDistanceToWall = 1f;
-    [SerializeField] private float _minRightArmDistanceToWall = 1f;
     private bool _againstWall = false;
+    [SerializeField] private float _slowDownRate = 0.9f;
 
     private void Awake()
     {
@@ -38,19 +36,19 @@ public class PlayerStateController : MonoBehaviour
 
         int[] walkingAllowedTransitions = { 0, 3 };
         _walkingState = new GDelegateState(WalkingStateCondition, WalkingStateAction,
-                                          null, null, null,
+                                          EnterWalkingState, null, null,
                                           1, "Walking", walkingAllowedTransitions.ToList(), 1,
                                           _animator, "Walking");
 
         int[] slingingAllowedTransitions = { 0, 3 };
-        _slingingState = new GDelegateState(SlingingStateCondition, null,
+        _slingingState = new GDelegateState(SlingingStateCondition, SlingingStateAction,
                                             null, LeaveSlingingState, null,
                                             2, "Slinging", slingingAllowedTransitions.ToList(), 2,
                                             _animator, "Slinging");
 
         int[] walkingSlingingAllowedTransitions = { 0, 1, 2 };
         _walkingSlingingState = new GDelegateState(WalkingSlingingStateCondition, WalkingSlingingStateAction,
-                                                   null, LeaveWalkingSlingingState,
+                                                   EnterWalkingSlingingState, LeaveWalkingSlingingState,
                                                    null, 3, "WalkingSlinging",
                                                    walkingSlingingAllowedTransitions.ToList(), 3,
                                                    _animator, "WalkingAndSlinging");
@@ -118,7 +116,7 @@ public class PlayerStateController : MonoBehaviour
         // Slow player to stop if moving and in idle state.
         if (this._playerBody.velocity != Vector2.zero)
         {
-            this._playerBody.velocity = Utils2D.SmoothVectorTo(this._playerBody.velocity, 0.9f);
+            this._playerBody.velocity = Utils2D.SmoothVectorTo(this._playerBody.velocity, _slowDownRate);
         }
     }
 
@@ -137,6 +135,11 @@ public class PlayerStateController : MonoBehaviour
     private void WalkingStateAction()
     {
         PlayerMove();
+    }
+
+    private void EnterWalkingState()
+    {
+        this._playerBody.velocity = Vector2.zero;
     }
 
     private void PlayerMove()
@@ -169,6 +172,15 @@ public class PlayerStateController : MonoBehaviour
     private bool SlingingStateCondition()
     {
         return Input.GetMouseButton(0) && !_againstWall;
+    }
+
+    private void SlingingStateAction()
+    {
+        // Slow player to stop if moving and in slinging state.
+        if (this._playerBody.velocity != Vector2.zero)
+        {
+            this._playerBody.velocity = Utils2D.SmoothVectorTo(this._playerBody.velocity, _slowDownRate);
+        }
     }
 
     private void LeaveSlingingState()
@@ -210,6 +222,11 @@ public class PlayerStateController : MonoBehaviour
     private void WalkingSlingingStateAction()
     {
         PlayerMove();
+    }
+
+    private void EnterWalkingSlingingState()
+    {
+        this._playerBody.velocity = Vector2.zero;
     }
 
     private void LeaveWalkingSlingingState()
