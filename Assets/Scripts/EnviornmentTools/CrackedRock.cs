@@ -14,7 +14,6 @@ public class CrackedRock : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log("Trigger");
         if (other.gameObject.tag == "Explosion-Stone")
         {
             GameObject.Destroy(this.gameObject);

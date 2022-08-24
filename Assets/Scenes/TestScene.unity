@@ -7132,6 +7132,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1241913105540121151, guid: a38794c3adbdaaa4c821df489b782835, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2022834519166458855, guid: a38794c3adbdaaa4c821df489b782835, type: 3}
       propertyPath: m_Name
       value: CrackedRock (1)
