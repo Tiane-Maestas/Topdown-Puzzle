@@ -12,6 +12,8 @@ TagManager:
   - Mind-Control-Stone
   - Joker-Stone
   - Enviornment
+  - Undefined
+  - PressurePlate
   layers:
   - Default
   - TransparentFX
