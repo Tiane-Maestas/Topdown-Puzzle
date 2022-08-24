@@ -32,7 +32,7 @@ public class PlayerStateController : MonoBehaviour
         this._stateMachine = new GStateMachine();
 
         int[] idleAllowedTransitions = { 1, 2, 3 };
-        _idleState = new GDelegateState(IdleStateCondition, null, null, null, null,
+        _idleState = new GDelegateState(IdleStateCondition, IdleStateAction, null, null, null,
                                        0, "Idle", idleAllowedTransitions.ToList(), 0,
                                        _animator, "Idle");
 
@@ -111,6 +111,15 @@ public class PlayerStateController : MonoBehaviour
     private bool IdleStateCondition()
     {
         return true;
+    }
+
+    private void IdleStateAction()
+    {
+        // Slow player to stop if moving and in idle state.
+        if (this._playerBody.velocity != Vector2.zero)
+        {
+            this._playerBody.velocity = Utils2D.SmoothVectorTo(this._playerBody.velocity, 0.9f);
+        }
     }
 
     #endregion
