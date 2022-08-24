@@ -8,6 +8,7 @@ namespace StoneTypes
         private GameObject _explosionArea;
         // Visiual effects from particle system.
         private GameObject _explosionVisuals;
+        private float _explosionTimeDuration = 0.5f;
         public ExplosionStone(Rigidbody2D stoneBody) : base(stoneBody)
         {
             stoneBody.gameObject.tag = StoneTags.Explosion;
@@ -15,6 +16,7 @@ namespace StoneTypes
             this.stoneTextureLocation = "Stones/explosion-stone";
             _explosionArea = (GameObject)Resources.Load("Prefabs/ExplosionArea", typeof(GameObject));
             _explosionVisuals = (GameObject)Resources.Load("Prefabs/Explosion", typeof(GameObject));
+            _explosionTimeDuration = _explosionVisuals.GetComponent<ParticleSystem>().main.duration;
         }
 
         public override void ThrowStone(Vector2 throwVector)
@@ -40,13 +42,13 @@ namespace StoneTypes
         public override void Destroy()
         {
             GameObject explosionArea = GameObject.Instantiate(_explosionArea, this._stoneBody.transform.position, this._stoneBody.transform.rotation);
-            GameObject.Destroy(explosionArea, 0.5f);
+            GameObject.Destroy(explosionArea, _explosionTimeDuration);
             GameObject explosionVisuals = GameObject.Instantiate(_explosionVisuals, this._stoneBody.transform.position, this._stoneBody.transform.rotation);
-            GameObject.Destroy(explosionVisuals, 0.5f);
-            base.Destroy();
+            GameObject.Destroy(explosionVisuals, _explosionTimeDuration);
 
             AudioClip _explosionSound = Resources.Load<AudioClip>("Sound/explosion");
             SoundManager.PlaySound(_explosionSound, 0.6f);
+            base.Destroy();
         }
     }
 }
