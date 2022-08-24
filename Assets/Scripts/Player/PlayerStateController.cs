@@ -83,13 +83,6 @@ public class PlayerStateController : MonoBehaviour
 
     private void CheckAgainstWall()
     {
-        // Check if the player hits the enviornment. Check Right and Up so they can't throw it out of the map.
-        RaycastHit2D[] chestHit = Physics2D.RaycastAll(this.gameObject.transform.position, this.gameObject.transform.up, this._minChestDistanceToWall);
-        Debug.DrawRay(this.gameObject.transform.position, this.gameObject.transform.up * this._minChestDistanceToWall, Color.green);
-
-        RaycastHit2D[] rightArmHit = Physics2D.RaycastAll(this.gameObject.transform.position, this.gameObject.transform.right, this._minRightArmDistanceToWall);
-        Debug.DrawRay(this.gameObject.transform.position, this.gameObject.transform.right * this._minRightArmDistanceToWall, Color.green);
-
         // Edge Case if walking with w and s up a wall.
         _rightHand = transform.right;
         _rightHand = Utils2D.RotateVector2ByRad(_rightHand, _rightHandAngle);
@@ -98,9 +91,7 @@ public class PlayerStateController : MonoBehaviour
         RaycastHit2D[] rightShoulderHit = Physics2D.RaycastAll(this.gameObject.transform.position, _rightHand, _throwOffset);
         Debug.DrawRay(this.gameObject.transform.position, _rightHand * _throwOffset, Color.green);
 
-        if ((chestHit.Length > 1 && chestHit[chestHit.Length - 1].collider.tag == "Enviornment") ||
-            (rightArmHit.Length > 1 && rightArmHit[rightArmHit.Length - 1].collider.tag == "Enviornment") ||
-            (rightShoulderHit.Length > 1 && rightShoulderHit[rightShoulderHit.Length - 1].collider.tag == "Enviornment"))
+        if ((rightShoulderHit.Length > 1 && rightShoulderHit[rightShoulderHit.Length - 1].collider.tag == "Enviornment"))
         {
             _againstWall = true;
         }
