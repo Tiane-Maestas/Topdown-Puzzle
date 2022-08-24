@@ -207,7 +207,8 @@ public class PlayerStateController : MonoBehaviour
         // Set Stone Type
         ActiveStone.throwVector = toMouseVector;
         ActiveStone.currentStoneBehaviour = currentStoneType;
-        GameObject newStone = Instantiate(genericStone, (Vector2)this.transform.position + _rightHand * _throwOffset, this.transform.rotation);
+        Vector3 rightHandPosition = new Vector3(_rightHand.x, _rightHand.y, 0) * _throwOffset;
+        GameObject newStone = Instantiate(genericStone, this.transform.position + rightHandPosition, this.transform.rotation);
     }
 
     #endregion
