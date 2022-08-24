@@ -193,16 +193,16 @@ public class PlayerStateController : MonoBehaviour
 
     private void ThrowStone()
     {
-        // Aim with mouse
-        Vector2 toMouseVector = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - (Vector2)transform.position;
-        toMouseVector.Normalize();
-        float throwAngle = Vector2.Angle(transform.up, toMouseVector);
-        toMouseVector = (throwAngle <= 90) ? toMouseVector : -toMouseVector;
-
         // Shoot Stone from Right Hand.
         _rightHand = transform.right;
         _rightHand = Utils2D.RotateVector2ByRad(_rightHand, _rightHandAngle);
         _rightHand.Normalize();
+
+        // Aim with mouse
+        Vector2 toMouseVector = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - ((Vector2)this.transform.position + _rightHand * _throwOffset);
+        toMouseVector.Normalize();
+        float throwAngle = Vector2.Angle(transform.up, toMouseVector);
+        toMouseVector = (throwAngle <= 90) ? toMouseVector : -toMouseVector;
 
         // Set Stone Type
         ActiveStone.throwVector = toMouseVector;
