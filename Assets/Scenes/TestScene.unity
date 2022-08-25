@@ -7645,6 +7645,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5728825398943306556, guid: 737996f27de378a499b63d55a0a199ab, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 563002563277207266, guid: 737996f27de378a499b63d55a0a199ab, type: 3}
       propertyPath: m_Name
       value: Button
