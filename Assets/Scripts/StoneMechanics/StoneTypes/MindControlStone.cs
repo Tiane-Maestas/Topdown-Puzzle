@@ -19,8 +19,7 @@ namespace StoneTypes
 
         public override void ThrowStone(Vector2 throwVector)
         {
-            AudioClip _throwSound = Resources.Load<AudioClip>("Sound/mindcontrol");
-            SoundManager.PlaySound(_throwSound, 0.6f);
+            SoundManager.PlaySound(SoundManager.Sound.Mindcontrol, 0.6f);
 
             base.ThrowStone(throwVector);
         }
@@ -60,8 +59,7 @@ namespace StoneTypes
 
         public override void Destroy()
         {
-            AudioClip _breakSound = Resources.Load<AudioClip>("Sound/minecraft_stone");
-            SoundManager.PlaySound(_breakSound, 1f);
+            SoundManager.PlaySound(SoundManager.Sound.StoneBreak, this._stoneBody.position, 1f);
 
             base.Destroy();
         }

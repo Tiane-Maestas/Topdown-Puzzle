@@ -62,6 +62,9 @@ public class PlayerStateController : MonoBehaviour
 
         // This doesn't allow the player to walk over holes but allows stones to be thrown over holes.
         Physics2D.IgnoreLayerCollision(7, 8, true);
+
+        // initialize soundmanager, should be move to game manager
+        SoundManager.Initialize();
     }
 
     private void Update()

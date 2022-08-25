@@ -3,21 +3,21 @@ using UnityEngine;
 
 namespace StoneTypes
 {
-    public class JokerStone : StoneBehaviour
+    public static class JokerAudios
     {
-        public static class JokerAudios
-        {
-            public static List<AudioClip> jokerAudioList = new List<AudioClip>();
+        public static List<AudioClip> jokerAudioList = new List<AudioClip>();
 
-            static JokerAudios()
+        static JokerAudios()
+        {
+            Object[] audioClips = Resources.LoadAll("Sound/joker");
+            foreach (AudioClip audioClip in audioClips)
             {
-                Object[] audioClips = Resources.LoadAll("Sound/joker");
-                foreach (AudioClip audioClip in audioClips)
-                {
-                    jokerAudioList.Add(audioClip);
-                }
+                jokerAudioList.Add(audioClip);
             }
         }
+    }
+    public class JokerStone : StoneBehaviour
+    {
 
         //TODO make static list in here0
         public JokerStone(Rigidbody2D stoneBody) : base(stoneBody)
@@ -55,10 +55,7 @@ namespace StoneTypes
 
         public override void Destroy()
         {
-            // random audio
-            int randInt = Random.Range(0, JokerAudios.jokerAudioList.Count);
-            AudioClip audio = JokerAudios.jokerAudioList[randInt];
-            SoundManager.PlaySound(audio, 1f);
+            SoundManager.PlaySound(SoundManager.Sound.Joker, this._stoneBody.position, 1f);
 
             base.Destroy();
         }
