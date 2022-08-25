@@ -1,9 +1,25 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace StoneTypes
 {
     public class JokerStone : StoneBehaviour
     {
+        public static class JokerAudios
+        {
+            public static List<AudioClip> jokerAudioList = new List<AudioClip>();
+
+            static JokerAudios()
+            {
+                Object[] audioClips = Resources.LoadAll("Sound/joker");
+                foreach (AudioClip audioClip in audioClips)
+                {
+                    jokerAudioList.Add(audioClip);
+                }
+            }
+        }
+
+        //TODO make static list in here0
         public JokerStone(Rigidbody2D stoneBody) : base(stoneBody)
         {
             stoneBody.gameObject.tag = StoneTags.Joker;
