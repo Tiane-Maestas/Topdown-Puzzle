@@ -51,8 +51,7 @@ namespace StoneTypes
             GameObject explosionVisuals = GameObject.Instantiate(_explosionVisuals, this._stoneBody.transform.position, this._stoneBody.transform.rotation);
             GameObject.Destroy(explosionVisuals, _explosionTimeDuration);
 
-            AudioClip _explosionSound = Resources.Load<AudioClip>("Sound/explosion");
-            SoundManager.PlaySound(_explosionSound, 0.6f);
+            SoundManager.PlaySound(SoundManager.Sound.Explosion, this._stoneBody.position, 0.6f);
             base.Destroy();
         }
     }

@@ -59,6 +59,9 @@ public class PlayerStateController : MonoBehaviour
         this._stateMachine.AddState(_walkingSlingingState);
 
         ConfigureSlingingState();
+
+        // initialize soundmanager, should be move to game manager
+        SoundManager.Initialize();
     }
 
     private void Update()
