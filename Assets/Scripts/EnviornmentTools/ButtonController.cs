@@ -42,7 +42,7 @@ public class ButtonController : MonoBehaviour
     private void ToggleButton()
     {
         _buttonOff = !_buttonOff;
-        _animator.SetBool("isDown", _buttonOff);
+        _animator.SetBool("isOff", _buttonOff);
         _lastTriggerTime = Time.time;
         if (!_buttonOff)
         {
