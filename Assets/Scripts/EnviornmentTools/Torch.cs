@@ -1,9 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Torch : MonoBehaviour
 {
+    // Should the doors that are listening open or close?
+    public UnityEvent openEvent;
+
     private bool _onFire = false;
     private GameObject _fireVisuals;
 
@@ -25,6 +27,7 @@ public class Torch : MonoBehaviour
         {
             Vector3 firePosition = new Vector3(this.transform.position.x, this.transform.position.y, -1);
             GameObject fireVisuals = GameObject.Instantiate(_fireVisuals, firePosition, this.transform.rotation);
+            openEvent.Invoke();
         }
         _onFire = true;
     }

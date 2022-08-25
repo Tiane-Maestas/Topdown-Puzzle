@@ -1,9 +1,13 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PressurePlateController : MonoBehaviour
 {
-    private Animator _animator;
+    // Should the doors that are listening open or close?
+    public UnityEvent openEvent;
+    public UnityEvent closeEvent;
 
+    private Animator _animator;
     void Start()
     {
         _animator = gameObject.GetComponent<Animator>();
@@ -13,6 +17,7 @@ public class PressurePlateController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _animator.SetBool("isDown", true);
+            openEvent.Invoke();
         }
     }
 
@@ -21,6 +26,7 @@ public class PressurePlateController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _animator.SetBool("isDown", false);
+            closeEvent.Invoke();
         }
     }
 }

@@ -1,10 +1,14 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ButtonController : MonoBehaviour
 {
-    private Animator _animator;
+    // Should the doors that are listening open or close?
+    public UnityEvent openEvent;
+    public UnityEvent closeEvent;
 
-    private bool _isDown = true;
+    private Animator _animator;
+    private bool _buttonOff = true;
 
     // Slows how fast you can trigger the same button.
     //(Mainly for Explosion and Fire stone having more than one collision.)
@@ -37,8 +41,16 @@ public class ButtonController : MonoBehaviour
 
     private void ToggleButton()
     {
-        _isDown = !_isDown;
-        _animator.SetBool("isDown", _isDown);
+        _buttonOff = !_buttonOff;
+        _animator.SetBool("isDown", _buttonOff);
         _lastTriggerTime = Time.time;
+        if (!_buttonOff)
+        {
+            openEvent.Invoke();
+        }
+        else
+        {
+            closeEvent.Invoke();
+        }
     }
 }
