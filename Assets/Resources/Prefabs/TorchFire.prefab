@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 926985955025030716}
   - component: {fileID: 926985955025030719}
   m_Layer: 0
-  m_Name: Fire
+  m_Name: TorchFire
   m_TagString: Fire-Stone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -285,8 +285,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 1
+      scalar: 0.2
+      minScalar: 0.3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -748,7 +748,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.25
       mode: 0
       spread: 0
       speed:
@@ -4781,7 +4781,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
