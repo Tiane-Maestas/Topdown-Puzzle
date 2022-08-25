@@ -7,7 +7,7 @@ public class Cobweb : MonoBehaviour
     [SerializeField] private float _cobwebDestructionDelay = 1f;
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Fire-Stone")
+        if (other.gameObject.CompareTag("Fire-Stone"))
         {
             GameObject.Destroy(this.gameObject, _cobwebDestructionDelay);
         }
@@ -15,7 +15,7 @@ public class Cobweb : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Fire-Stone")
+        if (other.CompareTag("Fire-Stone"))
         {
             GameObject.Destroy(this.gameObject, _cobwebDestructionDelay);
         }

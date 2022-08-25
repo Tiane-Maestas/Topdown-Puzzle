@@ -13,7 +13,7 @@ public class Torch : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Fire-Stone")
+        if (other.gameObject.CompareTag("Fire-Stone"))
         {
             LightTorch();
         }

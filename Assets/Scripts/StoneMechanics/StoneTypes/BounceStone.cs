@@ -30,7 +30,7 @@ namespace StoneTypes
 
         public override void OnCollisionEnter(Collision2D other)
         {
-            
+
             if (_currentNumberOfBounces >= _maxNumberOfBounces)
             {
                 AudioClip _breakSound = Resources.Load<AudioClip>("Sound/minecraft_stone");
@@ -43,6 +43,11 @@ namespace StoneTypes
                 SoundManager.PlaySound(_bounceSound, 1f);
             }
             _currentNumberOfBounces++;
+        }
+
+        public override void OnTriggerEnter2D(Collider2D other)
+        {
+            base.OnTriggerEnter2D(other);
         }
 
         public override void Update()
@@ -58,11 +63,6 @@ namespace StoneTypes
         public override void Destroy()
         {
             base.Destroy();
-        }
-
-        public override void OnTriggerEnter2D(Collider2D other)
-        {
-            base.OnTriggerEnter2D(other);
         }
     }
 }

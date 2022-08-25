@@ -27,6 +27,11 @@ namespace StoneTypes
             }
         }
 
+        public override void OnTriggerEnter2D(Collider2D other)
+        {
+            base.OnTriggerEnter2D(other);
+        }
+
         public override void Update()
         {
             // Ray Cast to either side of the stone to check if it's in a tunnel.
@@ -66,11 +71,6 @@ namespace StoneTypes
 
             AudioClip _teleportSound = Resources.Load<AudioClip>("Sound/teleport");
             SoundManager.PlaySound(_teleportSound, 0.7f);
-        }
-
-        public override void OnTriggerEnter2D(Collider2D other)
-        {
-            base.OnTriggerEnter2D(other);
         }
     }
 }

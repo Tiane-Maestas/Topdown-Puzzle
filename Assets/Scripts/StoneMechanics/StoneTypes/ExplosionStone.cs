@@ -29,6 +29,11 @@ namespace StoneTypes
             base.OnCollisionEnter(other);
         }
 
+        public override void OnTriggerEnter2D(Collider2D other)
+        {
+            base.OnTriggerEnter2D(other);
+        }
+
         public override void Update()
         {
             base.Update();
@@ -49,11 +54,6 @@ namespace StoneTypes
             AudioClip _explosionSound = Resources.Load<AudioClip>("Sound/explosion");
             SoundManager.PlaySound(_explosionSound, 0.6f);
             base.Destroy();
-        }
-
-        public override void OnTriggerEnter2D(Collider2D other)
-        {
-            base.OnTriggerEnter2D(other);
         }
     }
 }

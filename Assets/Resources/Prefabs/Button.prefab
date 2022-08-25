@@ -173,3 +173,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c52d2b08033b24d9e9e8668cd7d8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _allowedTags:
+  - Player
+  - Stone
+  - Fire-Stone
+  - Stone
+  - Stone
+  - Stone
+  - Stone
+  - Stone

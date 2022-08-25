@@ -20,7 +20,7 @@ namespace StoneTypes
         public override void ThrowStone(Vector2 throwVector)
         {
             AudioClip _throwSound = Resources.Load<AudioClip>("Sound/mindcontrol");
-            SoundManager.PlaySound(_throwSound, 1f);
+            SoundManager.PlaySound(_throwSound, 0.6f);
 
             base.ThrowStone(throwVector);
         }
@@ -28,6 +28,11 @@ namespace StoneTypes
         public override void OnCollisionEnter(Collision2D other)
         {
             base.OnCollisionEnter(other);
+        }
+
+        public override void OnTriggerEnter2D(Collider2D other)
+        {
+            base.OnTriggerEnter2D(other);
         }
 
         public override void Update()
@@ -59,11 +64,6 @@ namespace StoneTypes
             SoundManager.PlaySound(_breakSound, 1f);
 
             base.Destroy();
-        }
-
-        public override void OnTriggerEnter2D(Collider2D other)
-        {
-            base.OnTriggerEnter2D(other);
         }
     }
 }

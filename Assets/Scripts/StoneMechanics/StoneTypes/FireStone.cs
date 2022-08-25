@@ -33,6 +33,11 @@ namespace StoneTypes
             base.OnCollisionEnter(other);
         }
 
+        public override void OnTriggerEnter2D(Collider2D other)
+        {
+            base.OnTriggerEnter2D(other);
+        }
+
         public override void Update()
         {
             base.Update();
@@ -53,11 +58,6 @@ namespace StoneTypes
             GameObject fireVisuals = GameObject.Instantiate(_fireVisuals, this._stoneBody.transform.position, this._stoneBody.transform.rotation);
             GameObject.Destroy(fireVisuals, _fireTimeDuration);
             base.Destroy();
-        }
-
-        public override void OnTriggerEnter2D(Collider2D other)
-        {
-            base.OnTriggerEnter2D(other);
         }
     }
 }
