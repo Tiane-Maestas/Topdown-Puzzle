@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4410321664757167663}
   - component: {fileID: 4767660111170351640}
   - component: {fileID: 5111539268089519108}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GenericStoneObject
   m_TagString: Stone
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7102706062465910990}
   - component: {fileID: 18750505789300701}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: StoneGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
