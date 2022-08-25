@@ -73,4 +73,9 @@ public class ActiveStone : MonoBehaviour
     {
         this._stoneBehaviour.Destroy();
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        this._stoneBehaviour.OnTriggerEnter2D(other);
+    }
 }

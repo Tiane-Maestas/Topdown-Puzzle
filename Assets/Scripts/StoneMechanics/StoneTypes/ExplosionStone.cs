@@ -50,5 +50,10 @@ namespace StoneTypes
             SoundManager.PlaySound(_explosionSound, 0.6f);
             base.Destroy();
         }
+
+        public override void OnTriggerEnter2D(Collider2D other)
+        {
+            base.OnTriggerEnter2D(other);
+        }
     }
 }

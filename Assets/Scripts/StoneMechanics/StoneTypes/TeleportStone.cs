@@ -67,5 +67,10 @@ namespace StoneTypes
             AudioClip _teleportSound = Resources.Load<AudioClip>("Sound/teleport");
             SoundManager.PlaySound(_teleportSound, 0.7f);
         }
+
+        public override void OnTriggerEnter2D(Collider2D other)
+        {
+            base.OnTriggerEnter2D(other);
+        }
     }
 }

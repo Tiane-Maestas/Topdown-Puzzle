@@ -86,6 +86,13 @@ namespace StoneTypes
             GameObject breakVisuals = GameObject.Instantiate(_breakVisuals, this._stoneBody.transform.position, this._stoneBody.transform.rotation);
             GameObject.Destroy(breakVisuals, _breakTimeDuration);
         }
+        public virtual void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Button"))
+            {
+                GameObject.Destroy(this._stoneBody.gameObject);
+            }
+        }
     }
 }
 
