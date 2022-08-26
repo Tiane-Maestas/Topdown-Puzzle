@@ -11,12 +11,12 @@ public class ButtonController : MonoBehaviour
     private bool _buttonOff = true;
 
     // Slows how fast you can trigger the same button.
-    //(Mainly for Explosion and Fire stone having more than one collision.)
+    // (Mainly for Explosion and Fire stone having more than one collision.)
+    // Took out explosion and fire stone because it could hit buttons through walls.
     private float _triggerDelay = 0.5f;
     private float _lastTriggerTime;
 
-    private string[] _allowedTags = { "Player", "Stone", "Explosion-Stone", "Fire-Stone",
-                                      "Mind-Control-Stone", "Joker-Stone", "Bounce-Stone" };
+    private string[] _allowedTags = { "Player", "Stone", "Mind-Control-Stone", "Joker-Stone", "Bounce-Stone" };
 
     void Start()
     {
