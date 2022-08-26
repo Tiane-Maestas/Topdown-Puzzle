@@ -15,6 +15,7 @@ TagManager:
   - Undefined
   - PressurePlate
   - Button
+  - Coin
   layers:
   - Default
   - TransparentFX

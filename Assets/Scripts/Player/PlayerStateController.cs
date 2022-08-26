@@ -61,9 +61,10 @@ public class PlayerStateController : MonoBehaviour
         ConfigureSlingingState();
 
         // This doesn't allow the player to walk over holes but allows stones to be thrown over holes.
+        // Should be moved to a game manager.
         Physics2D.IgnoreLayerCollision(7, 8, true);
 
-        // initialize soundmanager, should be move to game manager
+        // Initialize soundmanager, should be move to game manager
         SoundManager.Initialize();
     }
 
@@ -108,6 +109,17 @@ public class PlayerStateController : MonoBehaviour
     private void FixedUpdate()
     {
         this._stateMachine.PerformStateAction();
+    }
+
+    // Could be moved to a collectible script on player to seperate things but here for now.
+    public int totalCoins = 0;
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Coin"))
+        {
+            totalCoins++;
+            GameObject.Destroy(other.gameObject);
+        }
     }
 
     #region Idle State Implementations
