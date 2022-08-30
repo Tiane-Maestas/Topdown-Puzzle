@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     private void Awake()
     {
-        ConfigureSoundManager();
+        ConfigureSounds();
 
         // This doesn't allow the player to walk over holes but allows stones to be thrown over holes.
         Physics2D.IgnoreLayerCollision(7, 8, true);
@@ -14,13 +14,15 @@ public class GameManager : MonoBehaviour
         SoundManager.PlaySound("BackgroundMusic", 0.1f);
     }
 
-    private void ConfigureSoundManager()
+    private void ConfigureSounds()
     {
         // Add any sound that will be used later here.
-        SoundManager.AddSound("BackgroundMusic", SoundType.Background, "sounds/Flood Of Determination");
+        SoundManager.AddSound("BackgroundMusic", SoundType.Background, "sounds/Exploring the Depths");
         SoundManager.AddSound("Walk", SoundType.Background, "sounds/Walk");
         SoundManager.ChangeAudioPitch("Walk", 1.75f);
         SoundManager.AddSound("ThrowStone", SoundType.ConditionalBackground, "sounds/stone_shot");
+        SoundManager.AddSound("DoorOpen", SoundType.ConditionalBackground, "sounds/Enter");
+        SoundManager.AddSound("Button", SoundType.ConditionalAmbient, "sounds/Button", 8);
         SoundManager.AddSound("Fire", SoundType.Ambient, "sounds/constant_fire", 4);
         SoundManager.AddSound("BreakStone", SoundType.ConditionalAmbient, "sounds/minecraft_stone", 8);
         SoundManager.AddSound("Bounce", SoundType.ConditionalAmbient, "sounds/stone_bounce", 8);

@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Nebula
 {
+    // StoneType Notes: 
+    // -Conditional types don't loop, non-conditional types loop.
+    // -Background types will be heard from anywhere, Ambient types are proximity.
+    // -Ambient types are destroyed once stopped, background types always have an audio source.
     public enum SoundType
     {
         None, // Functions like 'background' but has no specified sound type.
@@ -198,6 +202,7 @@ namespace Nebula
             audioPlayers[name].gameObject.transform.position = position;
         }
 
+        // Can be used to speed up the track.
         public static void ChangeAudioPitch(string name, float pitch)
         {
             audioPlayers[name].pitch = pitch;

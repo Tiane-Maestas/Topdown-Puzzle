@@ -1,4 +1,5 @@
 using UnityEngine;
+using Nebula;
 
 public class Barricade : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Barricade : MonoBehaviour
     private void OpenBarricade()
     {
         this.gameObject.SetActive(false);
+        SoundManager.PlaySound("DoorOpen");
     }
 
     private void CloseBarricade()

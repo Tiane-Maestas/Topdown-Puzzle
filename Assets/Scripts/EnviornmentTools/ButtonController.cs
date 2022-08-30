@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Nebula;
 
 public class ButtonController : MonoBehaviour
 {
@@ -52,5 +53,6 @@ public class ButtonController : MonoBehaviour
         {
             closeEvent.Invoke();
         }
+        SoundManager.PlaySound("Button", this.transform.position);
     }
 }

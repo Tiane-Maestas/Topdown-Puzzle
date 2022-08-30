@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Nebula;
 
 public class PressurePlateController : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PressurePlateController : MonoBehaviour
         {
             _animator.SetBool("isDown", true);
             openEvent.Invoke();
+            SoundManager.PlaySound("Button", this.transform.position);
         }
     }
 
@@ -27,6 +29,7 @@ public class PressurePlateController : MonoBehaviour
         {
             _animator.SetBool("isDown", false);
             closeEvent.Invoke();
+            SoundManager.PlaySound("Button", this.transform.position);
         }
     }
 }
