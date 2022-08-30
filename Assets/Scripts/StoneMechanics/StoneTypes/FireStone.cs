@@ -50,7 +50,7 @@ namespace StoneTypes
 
         public override void Destroy()
         {
-            SoundManager.PlaySound(SoundManager.Sound.Fire, this._stoneBody.position, 1f);
+            // SoundManager.PlaySound(SoundManager.Sound.Fire, this._stoneBody.position, 1f);
 
             GameObject fireArea = GameObject.Instantiate(_fireArea, this._stoneBody.transform.position, this._stoneBody.transform.rotation);
             GameObject.Destroy(fireArea, _fireTimeDuration);

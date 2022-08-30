@@ -65,7 +65,7 @@ public class PlayerStateController : MonoBehaviour
         Physics2D.IgnoreLayerCollision(7, 8, true);
 
         // Initialize soundmanager, should be move to game manager
-        SoundManager.Initialize();
+        // SoundManager.Initialize();
     }
 
     private void Update()

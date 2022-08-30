@@ -19,7 +19,7 @@ namespace StoneTypes
 
         public override void ThrowStone(Vector2 throwVector)
         {
-            SoundManager.PlaySound(SoundManager.Sound.Mindcontrol, 0.6f);
+            // SoundManager.PlaySound(SoundManager.Sound.Mindcontrol, 0.6f);
 
             base.ThrowStone(throwVector);
         }
@@ -59,7 +59,7 @@ namespace StoneTypes
 
         public override void Destroy()
         {
-            SoundManager.PlaySound(SoundManager.Sound.StoneBreak, this._stoneBody.position, 1f);
+            // SoundManager.PlaySound(SoundManager.Sound.StoneBreak, this._stoneBody.position, 1f);
 
             base.Destroy();
         }

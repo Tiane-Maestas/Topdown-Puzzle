@@ -38,7 +38,7 @@ namespace StoneTypes
 
         public override void Destroy()
         {
-            SoundManager.PlaySound(SoundManager.Sound.StoneBreak, this._stoneBody.position, 1f);
+            // SoundManager.PlaySound(SoundManager.Sound.StoneBreak, this._stoneBody.position, 1f);
 
             base.Destroy();
         }

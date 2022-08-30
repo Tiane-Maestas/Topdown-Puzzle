@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Nebula;
 
 public class Torch : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class Torch : MonoBehaviour
         {
             Vector3 firePosition = new Vector3(this.transform.position.x, this.transform.position.y, -1);
             GameObject fireVisuals = GameObject.Instantiate(_fireVisuals, firePosition, this.transform.rotation);
+
+            SoundManager.PlaySound("Fire", firePosition);
+
             openEvent.Invoke();
         }
         _onFire = true;

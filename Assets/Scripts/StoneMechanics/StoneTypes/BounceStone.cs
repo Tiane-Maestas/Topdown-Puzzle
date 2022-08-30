@@ -33,12 +33,12 @@ namespace StoneTypes
 
             if (_currentNumberOfBounces >= _maxNumberOfBounces)
             {
-                SoundManager.PlaySound(SoundManager.Sound.StoneBreak, this._stoneBody.position, 1f);
-                GameObject.Destroy(this._stoneBody.gameObject);
+                // SoundManager.PlaySound(SoundManager.Sound.StoneBreak, this._stoneBody.position, 1f);
+                // GameObject.Destroy(this._stoneBody.gameObject);
             }
             else
             {
-                SoundManager.PlaySound(SoundManager.Sound.Bounce, this._stoneBody.position, 1f);
+                // SoundManager.PlaySound(SoundManager.Sound.Bounce, this._stoneBody.position, 1f);
             }
             _currentNumberOfBounces++;
         }
