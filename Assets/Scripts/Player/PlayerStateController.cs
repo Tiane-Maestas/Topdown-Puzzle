@@ -36,7 +36,7 @@ public class PlayerStateController : MonoBehaviour
 
         int[] walkingAllowedTransitions = { 0, 3 };
         _walkingState = new GDelegateState(WalkingStateCondition, WalkingStateAction,
-                                          EnterWalkingState, null, null,
+                                          EnterWalkingState, LeaveWalkingState, null,
                                           1, "Walking", walkingAllowedTransitions.ToList(), 1,
                                           _animator, "Walking");
 
@@ -151,12 +151,18 @@ public class PlayerStateController : MonoBehaviour
     private void EnterWalkingState()
     {
         this._playerBody.velocity = Vector2.zero;
+        SoundManager.PlaySound("Walk", 0.6f);
     }
 
     private void PlayerMove()
     {
         _playerBody.MovePosition(_playerBody.position + _movement * _moveSpeed * Time.fixedDeltaTime);
         _playerBody.rotation = Mathf.Atan2(_movement.y, _movement.x) * Mathf.Rad2Deg - 90f;
+    }
+
+    private void LeaveWalkingState()
+    {
+        SoundManager.StopSound("Walk");
     }
 
     #endregion
@@ -239,6 +245,7 @@ public class PlayerStateController : MonoBehaviour
     private void EnterWalkingSlingingState()
     {
         this._playerBody.velocity = Vector2.zero;
+        SoundManager.PlaySound("Walk", 0.6f);
     }
 
     private void LeaveWalkingSlingingState()
@@ -247,6 +254,7 @@ public class PlayerStateController : MonoBehaviour
         {
             ThrowStone();
         }
+        SoundManager.StopSound("Walk");
     }
 
     #endregion

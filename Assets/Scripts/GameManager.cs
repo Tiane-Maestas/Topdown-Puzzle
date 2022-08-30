@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     {
         // Add any sound that will be used later here.
         SoundManager.AddSound("BackgroundMusic", SoundType.Background, "sounds/Flood Of Determination");
+        SoundManager.AddSound("Walk", SoundType.Background, "sounds/Walk");
+        SoundManager.ChangeAudioPitch("Walk", 1.75f);
         SoundManager.AddSound("ThrowStone", SoundType.ConditionalBackground, "sounds/stone_shot");
         SoundManager.AddSound("Fire", SoundType.Ambient, "sounds/constant_fire", 4);
         SoundManager.AddSound("BreakStone", SoundType.ConditionalAmbient, "sounds/minecraft_stone", 8);

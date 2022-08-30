@@ -197,5 +197,10 @@ namespace Nebula
         {
             audioPlayers[name].gameObject.transform.position = position;
         }
+
+        public static void ChangeAudioPitch(string name, float pitch)
+        {
+            audioPlayers[name].pitch = pitch;
+        }
     }
 }
