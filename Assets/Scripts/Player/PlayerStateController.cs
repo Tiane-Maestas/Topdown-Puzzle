@@ -59,13 +59,6 @@ public class PlayerStateController : MonoBehaviour
         this._stateMachine.AddState(_walkingSlingingState);
 
         ConfigureSlingingState();
-
-        // This doesn't allow the player to walk over holes but allows stones to be thrown over holes.
-        // Should be moved to a game manager.
-        Physics2D.IgnoreLayerCollision(7, 8, true);
-
-        // Initialize soundmanager, should be move to game manager
-        // SoundManager.Initialize();
     }
 
     private void Update()

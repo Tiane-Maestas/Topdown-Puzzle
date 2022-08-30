@@ -1,4 +1,5 @@
 using UnityEngine;
+using Nebula;
 
 namespace StoneTypes
 {
@@ -51,7 +52,7 @@ namespace StoneTypes
             GameObject explosionVisuals = GameObject.Instantiate(_explosionVisuals, this._stoneBody.transform.position, this._stoneBody.transform.rotation);
             GameObject.Destroy(explosionVisuals, _explosionTimeDuration);
 
-            // SoundManager.PlaySound(SoundManager.Sound.Explosion, this._stoneBody.position, 0.6f);
+            SoundManager.PlaySound("Explosion", this._stoneBody.position, 0.6f);
             base.Destroy();
         }
     }

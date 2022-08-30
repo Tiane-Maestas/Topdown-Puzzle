@@ -1,4 +1,5 @@
 using UnityEngine;
+using Nebula;
 
 namespace StoneTypes
 {
@@ -46,6 +47,7 @@ namespace StoneTypes
 
         public virtual void ThrowStone(Vector2 throwVector)
         {
+            SoundManager.PlaySound("ThrowStone", 0.1f);
             this._stoneBody.velocity = throwVector * this._stoneSpeed;
         }
 
@@ -74,6 +76,7 @@ namespace StoneTypes
 
         public virtual void Destroy()
         {
+            SoundManager.PlaySound("BreakStone", this._stoneBody.transform.position, 0.5f);
             GameObject breakVisuals = GameObject.Instantiate(_breakVisuals, this._stoneBody.transform.position, this._stoneBody.transform.rotation);
             GameObject.Destroy(breakVisuals, _breakTimeDuration);
         }

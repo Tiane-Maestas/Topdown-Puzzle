@@ -17,11 +17,15 @@ namespace Nebula
         public string name;
         public SoundType type;
         public string fileLocation;
-        public Sound(string name, SoundType type, string fileLocation)
+        public float spacialBlend;
+        public float maxAudibleDistance;
+        public Sound(string name, SoundType type, string fileLocation, float spacialBlend, float maxAudibleDistance)
         {
             this.name = name;
             this.type = type;
             this.fileLocation = fileLocation;
+            this.spacialBlend = spacialBlend;
+            this.maxAudibleDistance = maxAudibleDistance;
         }
 
         public override string ToString() => $"({name}, {type}, {fileLocation})";
@@ -35,30 +39,30 @@ namespace Nebula
 
         private static Vector3 defaultSoundPosition = new Vector3(0, 0, 0);
 
-        #region Data Handling
-        public static void AddSound(string name, string fileLocation)
-        {
-            if (sounds.ContainsKey(name))
-            {
-                Debug.LogError("Couldn't Add Sound. Already Exists as " + sounds[name]);
-                return;
-            }
-            sounds[name] = new Sound(name, SoundType.None, fileLocation);
-            CreateAudioSource(name, defaultSoundPosition);
-        }
+        // Global volume controls.
+        public static float[] volumeMultipliers = { 1, 1, 1, 1, 1 };
 
-        public static void AddSound(string name, SoundType type, string fileLocation)
+        #region Data Handling
+
+        public static void AddSound(string name, SoundType type, string fileLocation, float maxAudibleDistance = 10, float spacialBlend = 1)
         {
             if (sounds.ContainsKey(name))
             {
                 Debug.LogError("Couldn't Add Sound. Already Exists as " + sounds[name]);
                 return;
             }
-            sounds[name] = new Sound(name, type, fileLocation);
-            // Only create an audio source here if the sound is a background type.
-            if (Array.Exists(backgroundSoundTypes, element => element == sounds[name].type))
+
+            // Handle the various types of sounds differently. 
+            if (Array.Exists(backgroundSoundTypes, element => element == type))
             {
+                // Make sure spacial blend here is 0 because it is of some background type. (Should always be heard)
+                sounds.Add(name, new Sound(name, type, fileLocation, 0, maxAudibleDistance));
+                // Only create an audio source here if the sound is a background type becasue they only need one audio source.
                 CreateAudioSource(name, defaultSoundPosition);
+            }
+            else
+            {
+                sounds.Add(name, new Sound(name, type, fileLocation, spacialBlend, maxAudibleDistance));
             }
         }
 
@@ -138,12 +142,19 @@ namespace Nebula
             }
 
             audioPlayers[name].Stop();
+
+            // Handle edge case sound types.
+            if (sounds[name].type == SoundType.Ambient)
+            {
+                GameObject.Destroy(audioPlayers[name].gameObject);
+                audioPlayers.Remove(name);
+            }
         }
 
         private static void PlayAudioFromSource(string name, float volume)
         {
             // All sounds will loop by default. 
-            audioPlayers[name].volume = volume;
+            audioPlayers[name].volume = volume * volumeMultipliers[(int)sounds[name].type];
             audioPlayers[name].loop = true;
             audioPlayers[name].Play();
 
@@ -155,20 +166,36 @@ namespace Nebula
                 audioPlayers[name].loop = false;
                 audioPlayers.Remove(name);
             }
+            else if (sounds[name].type == SoundType.ConditionalBackground)
+            {
+                audioPlayers[name].loop = false;
+            }
         }
 
         private static void CreateAudioSource(string name, Vector3 position)
         {
             // Construct Game Object
             GameObject soundGameObject = new GameObject($"AudioSource: {name}");
+            soundGameObject.transform.position = position;
             AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
             audioSource.clip = GetAudioClip(name);
             audioPlayers[name] = audioSource;
+
+            // Configure Audio Source based off of sound type.
+            audioPlayers[name].spatialBlend = sounds[name].spacialBlend;
+            audioPlayers[name].maxDistance = sounds[name].maxAudibleDistance;
+            audioPlayers[name].rolloffMode = AudioRolloffMode.Custom;
+            audioPlayers[name].dopplerLevel = 0;
         }
 
         private static AudioClip GetAudioClip(string name)
         {
             return Resources.Load<AudioClip>(sounds[name].fileLocation);
+        }
+
+        public static void UpdateAudioSourceLocation(string name, Vector3 position)
+        {
+            audioPlayers[name].gameObject.transform.position = position;
         }
     }
 }

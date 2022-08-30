@@ -67,9 +67,10 @@ namespace StoneTypes
             }
             GameObject _player = GameObject.FindWithTag("Player");
             _player.transform.SetPositionAndRotation(this._stoneBody.transform.position, _player.transform.rotation);
-            base.Destroy();
 
-            // SoundManager.PlaySound(SoundManager.Sound.Teleport, 0.7f);
+            SoundManager.PlaySound("Teleport", this._stoneBody.transform.position, 0.5f);
+
+            base.Destroy();
         }
     }
 }

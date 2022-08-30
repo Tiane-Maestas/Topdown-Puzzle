@@ -1,31 +1,19 @@
-using System.Collections.Generic;
 using UnityEngine;
+using Nebula;
 
 namespace StoneTypes
 {
-    public static class JokerAudios
-    {
-        public static List<AudioClip> jokerAudioList = new List<AudioClip>();
-
-        static JokerAudios()
-        {
-            Object[] audioClips = Resources.LoadAll("Sound/joker");
-            foreach (AudioClip audioClip in audioClips)
-            {
-                jokerAudioList.Add(audioClip);
-            }
-        }
-    }
     public class JokerStone : StoneBehaviour
     {
 
-        //TODO make static list in here0
+        public static int numJokerAudios = 0;
+        private string _audio;
         public JokerStone(Rigidbody2D stoneBody) : base(stoneBody)
         {
             stoneBody.gameObject.tag = StoneTags.Joker;
             this._stoneSpeed = 10f;
             this.stoneTextureLocation = "Stones/joker-stone";
-
+            this._audio = $"Joker{Random.Range(0, JokerStone.numJokerAudios)}";
         }
 
         public override void ThrowStone(Vector2 throwVector)
@@ -55,8 +43,7 @@ namespace StoneTypes
 
         public override void Destroy()
         {
-            // SoundManager.PlaySound(SoundManager.Sound.Joker, this._stoneBody.position, 1f);
-
+            SoundManager.PlaySound(this._audio, this._stoneBody.position, 0.6f);
             base.Destroy();
         }
     }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Nebula;
 
 namespace StoneTypes
 {
@@ -19,8 +20,7 @@ namespace StoneTypes
 
         public override void ThrowStone(Vector2 throwVector)
         {
-            // SoundManager.PlaySound(SoundManager.Sound.Mindcontrol, 0.6f);
-
+            SoundManager.PlaySound("MindControlStone", this._stoneBody.transform.position, 0.6f);
             base.ThrowStone(throwVector);
         }
 
@@ -42,9 +42,13 @@ namespace StoneTypes
                 GameObject.Destroy(this._stoneBody.gameObject);
                 return;
             }
-            base.Update();
+
             this._towardsMouse = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - this._stoneBody.position;
             this._towardsMouse.Normalize();
+
+            SoundManager.UpdateAudioSourceLocation("MindControlStone", this._stoneBody.transform.position);
+
+            base.Update();
         }
 
         public override void FixedUpdate()
@@ -59,8 +63,7 @@ namespace StoneTypes
 
         public override void Destroy()
         {
-            // SoundManager.PlaySound(SoundManager.Sound.StoneBreak, this._stoneBody.position, 1f);
-
+            SoundManager.StopSound("MindControlStone");
             base.Destroy();
         }
     }
