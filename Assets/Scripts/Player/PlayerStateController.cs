@@ -111,6 +111,7 @@ public class PlayerStateController : MonoBehaviour
         if (other.CompareTag("Coin"))
         {
             totalCoins++;
+            SoundManager.PlaySound("Coin");
             GameObject.Destroy(other.gameObject);
         }
     }

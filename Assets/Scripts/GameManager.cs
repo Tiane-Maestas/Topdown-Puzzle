@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
         SoundManager.ChangeAudioPitch("Walk", 1.75f);
         SoundManager.AddSound("ThrowStone", SoundType.ConditionalBackground, "sounds/stone_shot");
         SoundManager.AddSound("DoorOpen", SoundType.ConditionalBackground, "sounds/Enter");
+        SoundManager.AddSound("Coin", SoundType.ConditionalBackground, "sounds/coin");
         SoundManager.AddSound("Button", SoundType.ConditionalAmbient, "sounds/Button", 8);
         SoundManager.AddSound("Fire", SoundType.Ambient, "sounds/constant_fire", 4);
         SoundManager.AddSound("BreakStone", SoundType.ConditionalAmbient, "sounds/minecraft_stone", 8);
