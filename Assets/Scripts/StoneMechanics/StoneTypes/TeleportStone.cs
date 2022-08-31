@@ -7,6 +7,8 @@ namespace StoneTypes
     {
         private bool _inTunnel = false;
         private float _tunnelRayLength = 0.3f;
+        private bool _againstHole = false;
+        public int holeLayer = 8;
         public TeleportStone(Rigidbody2D stoneBody) : base(stoneBody)
         {
             stoneBody.gameObject.tag = StoneTags.Teleport;
@@ -21,7 +23,7 @@ namespace StoneTypes
 
         public override void OnCollisionEnter(Collision2D other)
         {
-            if (!_inTunnel)
+            if (!_inTunnel && !_againstHole)
             {
                 base.OnCollisionEnter(other);
             }
@@ -35,15 +37,24 @@ namespace StoneTypes
         public override void Update()
         {
             // Ray Cast to either side of the stone to check if it's in a tunnel.
-            Vector2 rightCheck = Utils2D.RotateVector2ByDeg(this._stoneBody.gameObject.transform.right, 15);
-            RaycastHit2D[] rightHit = Physics2D.RaycastAll(this._stoneBody.gameObject.transform.position, rightCheck, _tunnelRayLength);
-            Debug.DrawRay(this._stoneBody.gameObject.transform.position, rightCheck * _tunnelRayLength, Color.green);
-            Vector2 leftCheck = Utils2D.RotateVector2ByDeg(-this._stoneBody.gameObject.transform.right, -15);
-            RaycastHit2D[] leftHit = Physics2D.RaycastAll(this._stoneBody.gameObject.transform.position, leftCheck, _tunnelRayLength);
-            Debug.DrawRay(this._stoneBody.gameObject.transform.position, leftCheck * _tunnelRayLength, Color.green);
+            Vector2 upRightCheck = Utils2D.RotateVector2ByDeg(this._stoneBody.gameObject.transform.right, 15);
+            RaycastHit2D[] upRightHit = Physics2D.RaycastAll(this._stoneBody.gameObject.transform.position, upRightCheck, _tunnelRayLength);
+            Debug.DrawRay(this._stoneBody.gameObject.transform.position, upRightCheck * _tunnelRayLength, Color.green);
+            Vector2 upLeftCheck = Utils2D.RotateVector2ByDeg(-this._stoneBody.gameObject.transform.right, -15);
+            RaycastHit2D[] upLeftHit = Physics2D.RaycastAll(this._stoneBody.gameObject.transform.position, upLeftCheck, _tunnelRayLength);
+            Debug.DrawRay(this._stoneBody.gameObject.transform.position, upLeftCheck * _tunnelRayLength, Color.green);
 
-            if ((rightHit.Length > 1 && rightHit[rightHit.Length - 1].collider.tag == "Enviornment") &&
-                (leftHit.Length > 1 && leftHit[leftHit.Length - 1].collider.tag == "Enviornment"))
+            Vector2 backRightCheck = Utils2D.RotateVector2ByDeg(this._stoneBody.gameObject.transform.right, -20);
+            RaycastHit2D[] backRightHit = Physics2D.RaycastAll(this._stoneBody.gameObject.transform.position, backRightCheck, _tunnelRayLength);
+            Debug.DrawRay(this._stoneBody.gameObject.transform.position, backRightCheck * _tunnelRayLength, Color.green);
+            Vector2 backLeftCheck = Utils2D.RotateVector2ByDeg(-this._stoneBody.gameObject.transform.right, 20);
+            RaycastHit2D[] backLeftHit = Physics2D.RaycastAll(this._stoneBody.gameObject.transform.position, backLeftCheck, _tunnelRayLength);
+            Debug.DrawRay(this._stoneBody.gameObject.transform.position, backLeftCheck * _tunnelRayLength, Color.green);
+
+            if ((upRightHit.Length > 1 && upRightHit[upRightHit.Length - 1].collider.tag == "Enviornment") &&
+                (upLeftHit.Length > 1 && upLeftHit[upLeftHit.Length - 1].collider.tag == "Enviornment") ||
+                (backRightHit.Length > 1 && backRightHit[backRightHit.Length - 1].collider.tag == "Enviornment") &&
+                (backLeftHit.Length > 1 && backLeftHit[backLeftHit.Length - 1].collider.tag == "Enviornment"))
             {
                 _inTunnel = true;
             }
@@ -51,6 +62,42 @@ namespace StoneTypes
             {
                 _inTunnel = false;
             }
+
+            // Check for holes.
+            _againstHole = false;
+
+            Vector2 forwardCheck = this._stoneBody.gameObject.transform.up;
+            RaycastHit2D[] forwardHit = Physics2D.RaycastAll(this._stoneBody.gameObject.transform.position, forwardCheck, _tunnelRayLength);
+            Debug.DrawRay(this._stoneBody.gameObject.transform.position, forwardCheck * _tunnelRayLength, Color.green);
+            Vector2 backCheck = -this._stoneBody.gameObject.transform.up;
+            RaycastHit2D[] backHit = Physics2D.RaycastAll(this._stoneBody.gameObject.transform.position, backCheck, _tunnelRayLength);
+            Debug.DrawRay(this._stoneBody.gameObject.transform.position, backCheck * _tunnelRayLength, Color.green);
+
+            foreach (RaycastHit2D hit in forwardHit)
+            {
+                _againstHole = _againstHole || (hit.collider.gameObject.layer.CompareTo(holeLayer) == 0);
+            }
+            foreach (RaycastHit2D hit in backHit)
+            {
+                _againstHole = _againstHole || (hit.collider.gameObject.layer.CompareTo(holeLayer) == 0);
+            }
+            foreach (RaycastHit2D hit in upRightHit)
+            {
+                _againstHole = _againstHole || (hit.collider.gameObject.layer.CompareTo(holeLayer) == 0);
+            }
+            foreach (RaycastHit2D hit in upLeftHit)
+            {
+                _againstHole = _againstHole || (hit.collider.gameObject.layer.CompareTo(holeLayer) == 0);
+            }
+            foreach (RaycastHit2D hit in backRightHit)
+            {
+                _againstHole = _againstHole || (hit.collider.gameObject.layer.CompareTo(holeLayer) == 0);
+            }
+            foreach (RaycastHit2D hit in backLeftHit)
+            {
+                _againstHole = _againstHole || (hit.collider.gameObject.layer.CompareTo(holeLayer) == 0);
+            }
+
             base.Update();
         }
 
