@@ -9,6 +9,7 @@ namespace StoneTypes
             stoneBody.gameObject.tag = StoneTags.Normal;
             this._stoneSpeed = 10f;
             this.stoneTextureLocation = "Stones/normal-stone";
+            Stats.NormalStonesThrown++;
         }
 
         public override void ThrowStone(Vector2 throwVector)

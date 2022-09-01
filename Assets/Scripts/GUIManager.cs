@@ -12,6 +12,8 @@ public class GUIManager : MonoBehaviour
     public Image currentStone;
     public Image nextStone;
     public Image prevStone;
+    public TMP_Text timerText;
+    public string currentTime;
     private int _currentStoneIndex = 0;
     private Sprite[] _stoneImageMap = new Sprite[8];
     private List<StoneType> _allStones = new List<StoneType>();
@@ -47,6 +49,12 @@ public class GUIManager : MonoBehaviour
             player.currentStoneType = _allStones[_currentStoneIndex];
             SetStoneImages();
         }
+
+        // Set Timer Text
+        float minutes = Mathf.FloorToInt(Time.time / 60);
+        float seconds = Mathf.FloorToInt(Time.time % 60);
+        currentTime = "" + (int)minutes + ":" + (int)seconds;
+        timerText.text = currentTime;
     }
 
     private void SetStoneImages()
@@ -56,6 +64,5 @@ public class GUIManager : MonoBehaviour
         currentStone.sprite = _stoneImageMap[_currentStoneIndex];
         nextStone.sprite = _stoneImageMap[nextStoneIndex];
         prevStone.sprite = _stoneImageMap[prevStoneIndex];
-        Debug.Log(prevStoneIndex);
     }
 }

@@ -22,6 +22,7 @@ namespace StoneTypes
             _stoneCollider = stoneBody.GetComponent<CircleCollider2D>();
             stoneBody.sharedMaterial = this._stoneMaterial;
             _stoneCollider.sharedMaterial = this._stoneMaterial;
+            Stats.BounceStonesThrown++;
         }
 
         public override void ThrowStone(Vector2 throwVector)

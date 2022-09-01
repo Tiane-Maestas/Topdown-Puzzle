@@ -14,6 +14,7 @@ namespace StoneTypes
             stoneBody.gameObject.tag = StoneTags.Teleport;
             this._stoneSpeed = 10f;
             this.stoneTextureLocation = "Stones/teleport-stone";
+            Stats.TeleportStonesThrown++;
         }
 
         public override void ThrowStone(Vector2 throwVector)
@@ -68,7 +69,7 @@ namespace StoneTypes
 
             Vector2 forwardCheck = this._stoneBody.gameObject.transform.up;
             RaycastHit2D[] forwardHit = Physics2D.RaycastAll(this._stoneBody.gameObject.transform.position, forwardCheck, _tunnelRayLength);
-            Debug.DrawRay(this._stoneBody.gameObject.transform.position, forwardCheck * _tunnelRayLength, Color.green);
+            Debug.DrawRay(this._stoneBody.gameObject.transform.position, forwardCheck * _tunnelRayLength, Color.red);
             Vector2 backCheck = -this._stoneBody.gameObject.transform.up;
             RaycastHit2D[] backHit = Physics2D.RaycastAll(this._stoneBody.gameObject.transform.position, backCheck, _tunnelRayLength);
             Debug.DrawRay(this._stoneBody.gameObject.transform.position, backCheck * _tunnelRayLength, Color.green);

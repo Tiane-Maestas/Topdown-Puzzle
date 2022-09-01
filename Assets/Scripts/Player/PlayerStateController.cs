@@ -219,14 +219,15 @@ public class PlayerStateController : MonoBehaviour
         // Aim with mouse
         Vector2 toMouseVector = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - ((Vector2)this.transform.position + _rightHand * _throwOffset);
         toMouseVector.Normalize();
-        float throwAngle = Vector2.Angle(transform.up, toMouseVector);
-        toMouseVector = (throwAngle <= 90) ? toMouseVector : -toMouseVector;
+        float throwAngle = Vector2.SignedAngle(transform.up, toMouseVector);
+        toMouseVector = (throwAngle <= 90 && throwAngle >= -90) ? toMouseVector : -toMouseVector;
 
         // Set Stone Type
         ActiveStone.throwVector = toMouseVector;
         ActiveStone.currentStoneBehaviour = currentStoneType;
         Vector3 rightHandPosition = new Vector3(_rightHand.x, _rightHand.y, 0) * _throwOffset;
         GameObject newStone = Instantiate(genericStone, this.transform.position + rightHandPosition, this.transform.rotation);
+        newStone.transform.Rotate(new Vector3(0, 0, throwAngle));
     }
 
     #endregion

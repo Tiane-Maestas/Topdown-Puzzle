@@ -1,9 +1,12 @@
 using UnityEngine;
 using Nebula;
 using StoneTypes;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static string endTime = "";
+    private GUIManager gui;
     private void Awake()
     {
         ConfigureSounds();
@@ -12,6 +15,8 @@ public class GameManager : MonoBehaviour
         Physics2D.IgnoreLayerCollision(7, 8, true);
 
         SoundManager.PlaySound("BackgroundMusic", 0.1f);
+
+        gui = GetComponent<GUIManager>();
     }
 
     private void ConfigureSounds()
@@ -37,6 +42,17 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < jokerAudioClips.Length; i++)
         {
             SoundManager.AddSound($"Joker{i}", SoundType.ConditionalAmbient, $"sounds/joker/{jokerAudioClips[i].name}", 8);
+        }
+    }
+
+    private void Update()
+    {
+        // Handle End Game
+        if (gui.coinText.text.Equals("10"))
+        {
+            endTime = gui.currentTime;
+            SoundManager.StopSound("BackgroundMusic");
+            SceneManager.LoadScene("MenuScene");
         }
     }
 }

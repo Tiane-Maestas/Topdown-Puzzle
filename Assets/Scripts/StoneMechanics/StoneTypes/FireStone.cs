@@ -22,6 +22,7 @@ namespace StoneTypes
             // Instantiate trail renderer and parent it to the stone body.
             _fireTrail = (GameObject)Resources.Load("Prefabs/FireTrail", typeof(GameObject));
             GameObject.Instantiate(_fireTrail, stoneBody.transform.position, stoneBody.transform.rotation).transform.SetParent(stoneBody.transform);
+            Stats.FireStonesThrown++;
         }
 
         public override void ThrowStone(Vector2 throwVector)

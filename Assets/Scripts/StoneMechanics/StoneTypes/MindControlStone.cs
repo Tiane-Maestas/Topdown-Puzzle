@@ -16,6 +16,7 @@ namespace StoneTypes
             this._stoneSpeed = 7.5f;
             this.stoneTextureLocation = "Stones/mind-control-stone";
             this._startTime = Time.time;
+            Stats.MindStonesThrown++;
         }
 
         public override void ThrowStone(Vector2 throwVector)

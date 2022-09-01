@@ -18,6 +18,7 @@ namespace StoneTypes
             _explosionArea = (GameObject)Resources.Load("Prefabs/ExplosionArea", typeof(GameObject));
             _explosionVisuals = (GameObject)Resources.Load("Prefabs/Explosion", typeof(GameObject));
             _explosionTimeDuration = _explosionVisuals.GetComponent<ParticleSystem>().main.duration;
+            Stats.ExplosionStonesThrown++;
         }
 
         public override void ThrowStone(Vector2 throwVector)

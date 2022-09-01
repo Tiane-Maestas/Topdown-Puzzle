@@ -14,6 +14,7 @@ namespace StoneTypes
             this._stoneSpeed = 10f;
             this.stoneTextureLocation = "Stones/joker-stone";
             this._audio = $"Joker{Random.Range(0, JokerStone.numJokerAudios)}";
+            Stats.JokerStonesThrown++;
         }
 
         public override void ThrowStone(Vector2 throwVector)
