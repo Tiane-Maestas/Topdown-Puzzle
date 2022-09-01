@@ -10,6 +10,8 @@ namespace StoneTypes
         private float _startTime;
         private float _minDistance = 0.25f;
 
+        private string _soundName;
+
         public MindControlStone(Rigidbody2D stoneBody) : base(stoneBody)
         {
             stoneBody.gameObject.tag = StoneTags.MindControl;
@@ -21,7 +23,7 @@ namespace StoneTypes
 
         public override void ThrowStone(Vector2 throwVector)
         {
-            SoundManager.PlaySound("MindControlStone", this._stoneBody.transform.position, 0.6f);
+            _soundName = SoundManager.PlaySound("MindControlStone", this._stoneBody.transform.position, 0.6f);
             base.ThrowStone(throwVector);
         }
 
@@ -47,7 +49,7 @@ namespace StoneTypes
             this._towardsMouse = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - this._stoneBody.position;
             this._towardsMouse.Normalize();
 
-            SoundManager.UpdateAudioSourceLocation("MindControlStone", this._stoneBody.transform.position);
+            SoundManager.UpdateAudioSourceLocation(_soundName, this._stoneBody.transform.position);
 
             base.Update();
         }
@@ -64,7 +66,7 @@ namespace StoneTypes
 
         public override void Destroy()
         {
-            SoundManager.StopSound("MindControlStone");
+            SoundManager.StopSoundAndDestroyAudioPlayer(_soundName);
             base.Destroy();
         }
     }
