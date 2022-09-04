@@ -3,8 +3,6 @@ using StoneTypes;
 
 public class ActiveStone : MonoBehaviour
 {
-    private float _stoneDestroyDelay = 10f;
-
     // Gives the ability to set the current type of stone from a static StoneType.
     public static StoneType currentStoneBehaviour = StoneType.Normal;
     public static Vector2 throwVector;
@@ -51,8 +49,6 @@ public class ActiveStone : MonoBehaviour
     private void Start()
     {
         this._stoneBehaviour.ThrowStone(throwVector);
-        // (Not really necessary and caused bugs with teleport.)
-        // Destroy(this.gameObject, _stoneDestroyDelay); 
     }
 
     private void OnCollisionEnter2D(Collision2D other)

@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         {
             endTime = gui.currentTime;
             SoundManager.StopSound("BackgroundMusic");
+            SoundManager.ClearAudioPlayersAndSounds();
             SceneManager.LoadScene("MenuScene");
         }
     }

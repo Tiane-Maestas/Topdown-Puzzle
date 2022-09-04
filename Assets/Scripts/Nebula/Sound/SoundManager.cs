@@ -332,6 +332,13 @@ namespace Nebula
             audioPlayers[name].pitch = pitch;
         }
 
+        // Audio players should be cleared on scene unload. 
+        public static void ClearAudioPlayersAndSounds()
+        {
+            audioPlayers.Clear();
+            sounds.Clear();
+        }
+
         // Given a name known to have an ambient base sound this will return the base name.
         private static string AmbientBaseName(string name)
         {
