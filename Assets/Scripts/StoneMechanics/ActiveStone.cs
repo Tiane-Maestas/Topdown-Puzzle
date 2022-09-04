@@ -51,7 +51,8 @@ public class ActiveStone : MonoBehaviour
     private void Start()
     {
         this._stoneBehaviour.ThrowStone(throwVector);
-        Destroy(this.gameObject, _stoneDestroyDelay);
+        // (Not really necessary and caused bugs with teleport.)
+        // Destroy(this.gameObject, _stoneDestroyDelay); 
     }
 
     private void OnCollisionEnter2D(Collision2D other)
